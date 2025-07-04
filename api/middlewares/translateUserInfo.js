@@ -8,7 +8,7 @@ export async function translateUserInfo(formFr) {
   // Translate arrays
   const references = await Promise.all(
     (formFr.references || []).map(ref =>
-      ref && ref.trim() !== '' ? translateText(ref, 'fr', 'en') : ''
+      ref && ref.text && ref.text.trim() !== '' ? translateText(ref.text, 'fr', 'en') : ''
     )
   )
 
@@ -61,7 +61,8 @@ export async function translateUserInfo(formFr) {
       certName: cert.certName || '',
       certOrg: cert.certOrg || '',
       certDate: cert.certDate || '',
-      certDesc: cert.certDesc ? await translateText(cert.certDesc, 'fr', 'en') : ''
+      certDesc: cert.certDesc ? await translateText(cert.certDesc, 'fr', 'en') : '',
+      pdfUrl: cert.pdfUrl || ''
     }))
   )
 
@@ -70,7 +71,7 @@ export async function translateUserInfo(formFr) {
     ...formFr,
     summary,
     objective,
-    references,
+    references: references.map(text => ({ text })), // No pdfUrl here
     hobbies,
     languages,
     skills,

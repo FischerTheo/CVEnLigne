@@ -11,6 +11,7 @@ const userInfoSchema = new mongoose.Schema({
   email: String,
   phone: String,
   linkedin: String,
+  github: String, // <-- ADD THIS LINE
   summary: String,
   objective: String,
 
@@ -47,10 +48,15 @@ const userInfoSchema = new mongoose.Schema({
       certName: String,
       certOrg: String,
       certDate: String,
-      certDesc: String
+      certDesc: String,
+      pdfUrl: String // Only one PDF per certification
     }
   ],
-  references: [String],
+  references: [
+    {
+      text: String
+    }
+  ],
   hobbies: [String]
 })
 

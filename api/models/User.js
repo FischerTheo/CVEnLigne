@@ -11,7 +11,8 @@ const userSchema = new mongoose.Schema({
 // Prevent more than one admin user
 userSchema.pre('save', async function (next) {
   if (this.isAdmin) {
-    const User = mongoose.model('User', userSchema)
+    // Use mongoose.models to avoid model overwrite error
+    const User = mongoose.models.User || mongoose.model('User', userSchema)
     const adminExists = await User.findOne({ isAdmin: true, _id: { $ne: this._id } })
     if (adminExists) {
       const err = new Error('An admin user already exists.')
