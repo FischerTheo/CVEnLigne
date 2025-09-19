@@ -31,3 +31,5 @@ relecture du code de la partie formulaire, checker que tout sois au bon endroit 
 revoir l'input et la fonction de calcule de l'age, rendre l'input plus restrictif
 
 revoir la mise en page (trop standard...)
+# Resume
+Online resume made for a final exam

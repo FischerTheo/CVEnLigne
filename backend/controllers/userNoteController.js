@@ -1,17 +1,7 @@
 import UserNote from '../models/UserNote.js'
-import jwt from 'jsonwebtoken'
+import { extractUserId } from '../utils/jwt.js'
 
-const getUserId = (req) => {
-  const auth = req.headers.authorization
-  if (!auth) return null
-  try {
-    const token = auth.split(' ')[1]
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    return decoded.userId
-  } catch {
-    return null
-  }
-}
+const getUserId = extractUserId
 
 export const getNote = async (req, res) => {
   const userId = getUserId(req)
