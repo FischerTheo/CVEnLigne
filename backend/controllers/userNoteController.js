@@ -3,6 +3,8 @@ import { extractUserId } from '../utils/jwt.js'
 
 const getUserId = extractUserId
 
+
+// Récupère le blocc note 
 export const getNote = async (req, res) => {
   const userId = getUserId(req)
   if (!userId) return res.status(401).json({ error: 'Unauthorized' })
@@ -10,6 +12,8 @@ export const getNote = async (req, res) => {
   res.json(note)
 }
 
+
+// Sauvegarde ou met à jour le bloc note 
 export const saveNote = async (req, res) => {
   const userId = getUserId(req)
   if (!userId) return res.status(401).json({ error: 'Unauthorized' })

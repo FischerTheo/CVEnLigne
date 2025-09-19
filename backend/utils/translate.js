@@ -1,35 +1,16 @@
-// utils/translate.js — DeepL-backed translator with safe fallbacks
+// Utilitaire de traduction basé sur DeepL, avec gestion des erreurs
 
+// Normalise le code langue pour DeepL
 function normalizeLang(code, { asTarget = false } = {}) {
   if (!code) return undefined
   const c = String(code).toLowerCase()
-  // Basic map for common languages; extend if needed
+  // Mappage des langues
   if (c.startsWith('fr')) return 'FR'
   if (c.startsWith('en')) return 'EN'
-  if (c.startsWith('de')) return 'DE'
-  if (c.startsWith('es')) return 'ES'
-  if (c.startsWith('it')) return 'IT'
-  if (c.startsWith('pt')) {
-    // DeepL supports PT (source) and PT-PT/PT-BR (target)
-    return asTarget ? 'PT-PT' : 'PT'
-  }
-  if (c.startsWith('nl')) return 'NL'
-  if (c.startsWith('pl')) return 'PL'
-  if (c.startsWith('ru')) return 'RU'
-  if (c.startsWith('ja')) return 'JA'
-  if (c.startsWith('zh')) return 'ZH'
-  if (c.startsWith('ar')) return 'AR'
-  if (c.startsWith('tr')) return 'TR'
-  if (c.startsWith('cs')) return 'CS'
-  if (c.startsWith('sv')) return 'SV'
-  if (c.startsWith('da')) return 'DA'
-  if (c.startsWith('fi')) return 'FI'
-  if (c.startsWith('hu')) return 'HU'
-  if (c.startsWith('el')) return 'EL'
-  // Fallback to upper-case two-letter code
-  return c.slice(0, 2).toUpperCase()
+  return undefined
 }
 
+// Appel l'API DeepL pour traduire un texte
 async function deeplTranslate(text, source = 'fr', target = 'en') {
   const key = process.env.DEEPL_API_KEY
   if (!key) return null
@@ -38,7 +19,7 @@ async function deeplTranslate(text, source = 'fr', target = 'en') {
   const baseUrl = process.env.DEEPL_API_URL || (usePaid ? 'https://api.deepl.com' : 'https://api-free.deepl.com')
   const url = `${baseUrl}/v2/translate`
 
-  // Map languages to DeepL codes
+  // Conversion des langues pour DeepL
   const sourceLang = normalizeLang(source)
   const targetLang = normalizeLang(target, { asTarget: true })
 
@@ -46,11 +27,10 @@ async function deeplTranslate(text, source = 'fr', target = 'en') {
   params.append('text', text)
   if (sourceLang) params.append('source_lang', sourceLang)
   if (targetLang) params.append('target_lang', targetLang)
-  // Preserve basic formatting/newlines
+  // Préserve la mise en forme
   params.append('preserve_formatting', '1')
 
-
-  // Use AbortController to avoid hanging requests
+  // Timeout pour éviter les requêtes bloquantes
   const controller = new AbortController()
   const timeoutMs = Number(process.env.DEEPL_TIMEOUT_MS || 10000)
   const timeout = setTimeout(() => controller.abort(), timeoutMs)
@@ -68,7 +48,7 @@ async function deeplTranslate(text, source = 'fr', target = 'en') {
     })
   } catch (fetchErr) {
     clearTimeout(timeout)
-    // propagate as a thrown error so caller can decide, but here return null
+    // En cas d'erreur réseau, retourne null
     return null
   }
   clearTimeout(timeout)
@@ -82,6 +62,7 @@ async function deeplTranslate(text, source = 'fr', target = 'en') {
   return typeof translated === 'string' ? translated : null
 }
 
+// Lecture sécurisée des erreurs API
 async function safeReadError(res) {
   try {
     const j = await res.json()
@@ -91,6 +72,7 @@ async function safeReadError(res) {
   }
 }
 
+// Fonction principale de traduction utilisée dans l'app
 export async function translateText(text, source = 'fr', target = 'en') {
   const input = text || ''
   const s = (source || 'fr').toLowerCase()
@@ -98,14 +80,14 @@ export async function translateText(text, source = 'fr', target = 'en') {
   if (!input.trim()) return ''
   if (s === t) return input
 
-  // Try DeepL when configured
+  // Tente DeepL si configuré
   try {
     const out = await deeplTranslate(input, s, t)
     if (out) return out
   } catch (err) {
-    // swallow and fall back to original text
+    // En cas d'échec, retourne le texte original
   }
 
-  // Last resort: return original text (no-op)
+  // Si tout échoue, retourne le texte d'original
   return input
 }

@@ -1,19 +1,24 @@
+// Modélisation du schéma du CV français avec Mongoose
 import mongoose from 'mongoose'
 
+// Niveau de langue
 const LanguageLevelSchema = new mongoose.Schema({
   language: { type: String, default: '' },
   level: { type: String, default: '' }
 }, { _id: false })
 
+// Compétence technique
 const SkillSchema = new mongoose.Schema({
   skill: { type: String, default: '' },
   level: { type: String, default: '' }
 }, { _id: false })
 
+// Compétence comportementale
 const SoftSkillSchema = new mongoose.Schema({
   skill: { type: String, default: '' }
 }, { _id: false })
 
+// Expérience professionnelle
 const ExperienceSchema = new mongoose.Schema({
   jobTitle: { type: String, default: '' },
   company: { type: String, default: '' },
@@ -23,6 +28,7 @@ const ExperienceSchema = new mongoose.Schema({
   responsibilities: { type: String, default: '' }
 }, { _id: false })
 
+// Certification ou diplôme
 const CertificationSchema = new mongoose.Schema({
   certName: { type: String, default: '' },
   certOrg: { type: String, default: '' },
@@ -31,19 +37,22 @@ const CertificationSchema = new mongoose.Schema({
   pdfUrl: { type: String, default: '' }
 }, { _id: false })
 
+// Référence
 const ReferenceSchema = new mongoose.Schema({
   text: { type: String, default: '' }
 }, { _id: false })
 
+// Projet réalisé
 const ProjectItemSchema = new mongoose.Schema({
   title: { type: String, default: '' },
   description: { type: String, default: '' }
 }, { _id: false })
 
+// Schéma principal du formulaire CV (FR)
 const FormFRSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Utilisateur lié
 
-  // UserInfo fields (FR)
+  // Infos personnelles
   fullName: { type: String, default: '' },
   dateOfBirth: { type: String, default: '' },
   jobTitle: { type: String, default: '' },
@@ -66,10 +75,12 @@ const FormFRSchema = new mongoose.Schema({
   hobbies: { type: [String], default: [] },
   cvPdfUrl: { type: String, default: '' },
 
-  // Projects
+  // Projets
   projects: { type: [ProjectItemSchema], default: [] }
 }, { timestamps: true })
 
+// Un seul CV FR par utilisateur
 FormFRSchema.index({ userId: 1 }, { unique: true })
 
+// Export du modèle
 export default mongoose.model('FormFR', FormFRSchema)

@@ -1,14 +1,18 @@
+// Utilitaire JWT pour l'authentification
 import jwt from 'jsonwebtoken'
 
+// Vérifie si la clé secrète JWT est présente
 export const isJwtConfigured = Boolean(process.env.JWT_SECRET)
-const JWT_SECRET = process.env.JWT_SECRET || ''
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '1h'
+const JWT_SECRET = process.env.JWT_SECRET || '' // Clé secrète
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '1h' // Durée de validité
 
+// Génère un token JWT à partir d'un payload
 export function signToken(payload, options = {}) {
   if (!JWT_SECRET) throw new Error('JWT_SECRET is not configured')
   return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN, ...options })
 }
 
+// Vérifie et décode un token JWT
 export function verifyToken(token) {
   if (!JWT_SECRET) return null
   try {
@@ -18,6 +22,7 @@ export function verifyToken(token) {
   }
 }
 
+// Extrait l'ID utilisateur depuis le header Authorization
 export function extractUserId(req) {
   const auth = req.headers.authorization
   if (!auth) return null
