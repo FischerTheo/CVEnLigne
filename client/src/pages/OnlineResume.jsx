@@ -109,7 +109,7 @@ function OnlineResume() {
           {/* image */}
           <img
             src="/profile.png"
-            alt={`${userInfo?.fullName || 'Profile'} - Professional photo`}
+            alt={`${userInfo?.fullName || 'photo placeholder pour le moment'}`}
             className="profile-img"
           />
         </section>

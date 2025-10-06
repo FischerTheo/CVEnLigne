@@ -116,7 +116,7 @@ function ProfileSidebar({ userInfo, t, getAge, skillLevels }) {
       {/* Photo de profil */}
       <img 
         src="/profile.png" 
-        alt={`${userInfo.fullName || 'Profile'} photo`}
+        alt={`${userInfo.fullName || 'photo de Profile'}`}
         className="profile-img-sidebar"
       />
       {/* Nom */}
@@ -275,7 +275,7 @@ function ProfileSidebar({ userInfo, t, getAge, skillLevels }) {
               >
                 <img
                   src="/link.svg"
-                  alt=""
+                  alt="linkedin"
                   className="profile-social-icon"
                   aria-hidden="true"
                 />
@@ -290,7 +290,7 @@ function ProfileSidebar({ userInfo, t, getAge, skillLevels }) {
               >
                 <img
                   src="/git.svg"
-                  alt=""
+                  alt="github"
                   className="profile-social-icon"
                   aria-hidden="true"
                 />

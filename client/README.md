@@ -75,11 +75,3 @@ client/
 ```
 
 ## Fonctionnalités
-
-- 🌍 Multi-langue (FR/EN)
-- 📝 Édition de CV en temps réel
-- 🔐 Authentification JWT
-- 📱 Responsive design
-- 🎨 Thème personnalisable
-- 📄 Upload de PDF (CV, certifications)
-- 🔄 Synchronisation formulaires FR/EN
