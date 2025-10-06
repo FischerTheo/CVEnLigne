@@ -29,7 +29,7 @@ export const saveProjects = async (req, res) => {
     const userId = getUserId(req)
     if (!userId) return res.status(401).json({ error: 'Unauthorized' })
     const lang = (req.query.lang === 'en') ? 'en' : 'fr'
-    // Nettoie et structure les projets reçus
+    // Nettoie et structure les projets reçu
     const { projects: rawProjects = [] } = req.body || {}
     const projects = Array.isArray(rawProjects)
       ? rawProjects.map(({ title = '', description = '' }) => ({ title, description }))
@@ -52,7 +52,7 @@ export const saveProjects = async (req, res) => {
 export const getAdminProjects = async (req, res) => {
   try {
     const adminUser = await User.findOne({ isAdmin: true })
-    if (!adminUser) return res.status(404).json({ error: 'Admin user not found' })
+    if (!adminUser) return res.status(404).json({ error: 'Admin not found' })
     const lang = (req.query.lang === 'en') ? 'en' : 'fr'
     const Model = lang === 'en' ? FormEN : FormFR
     const doc = await Model.findOne({ userId: adminUser._id })

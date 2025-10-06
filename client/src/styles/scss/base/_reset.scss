@@ -1,6 +1,4 @@
-// =============================================================================
-// BASE STYLES - Global Document Styles
-// =============================================================================
+// STYLES DE BASE - Styles globaux du document
 
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
@@ -18,14 +16,14 @@ body {
   padding-left: 346px;
 }
 
-// === Tablet Body Adjustments ===
+// Ajustements body tablette
 @include tablet {
   body {
     padding-top: $navbar-height-tablet;
   }
 }
 
-// === Mobile Large Body Adjustments ===
+// Ajustements body mobile large
 @include mobile-large {
   body {
     padding-top: $navbar-height-mobile;
@@ -34,7 +32,7 @@ body {
   }
 }
 
-// === Utility Classes ===
+// Classes utilitaires
 .flex-1 {
   flex: 1;
   min-width: 0;

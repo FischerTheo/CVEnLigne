@@ -1,23 +1,29 @@
 // Formulaire des champs répétables (langues, compétences, expériences, projets...)
+// Gère les listes dynamiques avec possibilité d'ajouter/supprimer des éléments
+// et de traduire chaque champ individuellement via l'API
 import React, { useState } from 'react'
 import AutoResizeTextarea from '../../common/AutoResizeTextarea'
 import { API, apiFetch } from '../../../lib/api'
 import { toast } from 'react-toastify'
 
 function RepeatableForm({
-  form,
-  handleArrayChange,
-  addArrayItem,
-  removeArrayItem,
-  showTranslateButtons,
-  showAddButtons = true,
-  showRemoveButtons = true,
-  effectiveLang = 'fr'
+  form,                    // Données du formulaire 
+  handleArrayChange,       // Fonction pour modifier un élément d'un tableau
+  addArrayItem,            // Fonction pour ajouter un élément à un tableau
+  removeArrayItem,         // Fonction pour supprimer un élément d'un tableau
+  showTranslateButtons,    // true = affiche les boutons de traduction (formulaire FR uniquement)
+  showAddButtons = true,   // false = masque les boutons "Add" (formulaire EN en lecture seule)
+  showRemoveButtons = true,// false = masque les boutons "Remove" (formulaire EN en lecture seule)
+  effectiveLang = 'fr'     // Langue active pour adapter les textes des niveaux ('fr' ou 'en')
 }) {
+  // État pour tracker quel champ est en cours de traduction
   const [loadingField, setLoadingField] = useState(null)
+  
+  // Génère une clé unique pour identifier un champ (ex: "experiences-0-jobTitle")
   const makeLoadKey = (field, idx, key) => key ? `${field}-${idx}-${key}` : `${field}-${idx}`
 
-  // Bouton de traduction pour chaque champ d'un tableau
+  // Bouton de traduction réutilisable pour chaque champ
+  // Affiche "Tr" par défaut, "Traduire" en taille large, "..." pendant le chargement
   const TranslateBtn = ({ show, onClick, disabled, fieldName, size = 'default' }) => {
     const sizeClass = size === 'sm' ? 'btn-translate-sm' : size === 'lg' ? 'btn-translate-lg' : '';
     return show ? (
@@ -32,38 +38,52 @@ function RepeatableForm({
     ) : null
   }
 
-  // Fonction pour traduire un champ d'un tableau (FR <-> EN)
+  // Traduit un champ spécifique via l'API 
+  // Paramètres: field = nom du tableau, idx = index de l'élément, key = propriété à traduire
   async function handleTranslate(field, idx, key = null) {
     const loadKey = makeLoadKey(field, idx, key)
+    
+    // Récupère l'élément ciblé dans le tableau
     const item = form[field] && form[field][idx]
     if (!item) return
+    
+    // Récupère la valeur à traduire (item ou item[key])
     const value = key === null ? item : item[key]
     if (!value || !String(value).trim()) return
+    
+    // Active le loader pour ce champ spécifique
     setLoadingField(loadKey)
     try {
+      // Appel l'API de traduction
       const data = await apiFetch('/api/translate/text', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: value, source: 'fr', target: 'en' })
       })
       const translatedText = data?.translatedText ?? value
-      // update the array value (key may be null for primitive arrays)
+      
+      // Met à jour le formulaire avec le texte traduit
       handleArrayChange(field, idx, key, translatedText)
+      
+      // Notification utilisateur
       if (translatedText === value) toast.info("Aucune modification (peut-être déjà traduit).")
       else toast.success('Traduction appliquée.')
     } catch (e) {
       console.error('Translation failed:', e)
       toast.error('Échec de la traduction')
     } finally {
+      // Désactive le loader
       setLoadingField(null)
     }
   }
   
-  // Liste des niveaux de compétences selon la langue
+  // Liste des niveaux de compétences selon la langue active
   const skillLevels = effectiveLang === 'en' 
     ? ['Beginner', 'Intermediate', 'Advanced', 'Expert']
     : ['Débutant', 'Intermédiaire', 'Avancé', 'Expert']
-  // pour optimiser les champs tableaux
+  
+  // Fonction utilitaire pour générer rapidement un champ répétable simple
+  // Utilisée pour les Soft Skills et Hobbies (listes de strings simples)
   const champTab = (label, field, placeholder, key = 'skill') => (
     <>
       <h3 className="form-section-title">{label}</h3>
@@ -211,7 +231,6 @@ function RepeatableForm({
             ))}
           </select>
           {/* Bouton Traduire pour le select niveau uniquement si ce n'est pas le formulaire anglais */}
-          {/* Level translate button removed as requested */}
           {showRemoveButtons && form.skills.length > 1 && (
             <button 
               type="button" 
@@ -388,7 +407,7 @@ function RepeatableForm({
             />
           </div>
           
-          {/* Section upload PDF certification */}
+          {/* Section upload PDF certif */}
           <div style={{ marginTop: 12, marginBottom: 12 }}>
             <label htmlFor={`cert-pdf-${idx}`} className="cert-pdf-label">
               Certificat PDF {idx + 1}
@@ -525,7 +544,7 @@ function RepeatableForm({
             fieldName={`reference ${idx + 1}`}
             size="lg"
           />
-          {/* Remove PDF Upload for References */}
+          {/* ajoute ou supp des references */}
           {showRemoveButtons && form.references.length > 1 && (
             <button 
               type="button" 

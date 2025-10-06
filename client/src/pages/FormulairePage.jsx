@@ -19,24 +19,21 @@ function FormulairePage({ token, formulaireRefs }) {
           showAddButtons={true}
           forcedLang="fr"
           onFormChange={(newForm) => {
-            // push updates from left FR form to right EN form
+            // Propage les mises à jour du formulaire FR (gauche) vers le formulaire EN (droite)
             if (!formulaireRef2.current) return
             const target = formulaireRef2.current
             if (newForm && typeof newForm === 'object' && 'field' in newForm && 'value' in newForm) {
-              // Array cell update when idx is provided
+              // Mise à jour d'un élément de tableau quand idx est fourni
               if ('idx' in newForm && typeof newForm.idx === 'number' && target.setExternalArrayField) {
                 target.setExternalArrayField(newForm.field, newForm.idx, newForm.key, newForm.value)
                 return
               }
-              // Simple field update
+              // Mise à jour d'un champ simple
               if (target.setExternalField) {
                 target.setExternalField(newForm.field, newForm.value)
                 return
               }
             }
-            // Fallback: whole-form replacement - Ne devrait plus être nécessaire
-            // On ne fait rien pour éviter d'écraser le formulaire EN
-            console.warn('FormulairePage: Received full form update without field specification, ignoring to prevent data loss')
           }}
         />
       </div>

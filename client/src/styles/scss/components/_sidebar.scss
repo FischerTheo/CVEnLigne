@@ -1,6 +1,4 @@
-// =============================================================================
-// PROFILE SIDEBAR - Left Sidebar Component
-// =============================================================================
+// BARRE LATÉRALE PROFIL - Composant barre latérale gauche
 
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
@@ -16,6 +14,44 @@
   height: calc(100vh - 90px);
   overflow-y: auto;
   border-radius: 0 $radius-xxxl $radius-xxxl 0;
+}
+
+// slider profilesidebar (UNIQUEMENT PC > 1024px)
+@media (min-width: 1025px) {
+  .sidebar-resize-handle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 100%;
+    cursor: ew-resize;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+      background: rgba($button-bg, 0.08);
+      
+      .sidebar-resize-indicator {
+        opacity: 1;
+        background: $button-bg;
+      }
+    }
+    
+    &:active {
+      background: rgba($button-bg, 0.15);
+    }
+  }
+
+  .sidebar-resize-indicator {
+    width: 3px;
+    height: 50px;
+    background: rgba($button-bg, 0.25);
+    border-radius: 2px;
+    opacity: 0.4;
+    transition: all $transition-fast;
+  }
 }
 
 .profile {
@@ -197,7 +233,7 @@
   }
 }
 
-// === Table Styles (for skills) ===
+// Styles de tableau (pour les compétences)
 .table-transparent {
   width: 100%;
   border-collapse: collapse;
@@ -222,7 +258,7 @@
   text-align: left;
 }
 
-// === Section Title ===
+// Titre de section
 .section-title {
   font-size: $font-md;
   color: $text-color;
@@ -233,7 +269,7 @@
   padding-bottom: $spacing-sm;
 }
 
-// === HR Style ===
+// Style de séparateur
 .hr-style {
   border: none;
   height: 1px;
@@ -272,7 +308,7 @@
   font-size: $font-sm;
 }
 
-// === Tablet Adaptations ===
+// Adaptations tablette
 @include tablet {
   .profile-sidebar {
     width: $sidebar-width-tablet;
@@ -392,7 +428,7 @@
   }
 }
 
-// === Mobile Large Adaptations ===
+// Adaptations mobile large
 @include mobile-large {
   .profile-sidebar {
     position: relative;

@@ -1,10 +1,73 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 // Composant barre latérale du profil (infos, langues, compétences, hobbies, contact)
 function ProfileSidebar({ userInfo, t, getAge, skillLevels }) {
+  // État pour la largeur du sidebar (uniquement sur PC)
+  const [sidebarWidth, setSidebarWidth] = useState(() => {
+    const saved = localStorage.getItem('sidebarWidth')
+    return saved ? parseInt(saved) : 425
+  })
+  const [isResizing, setIsResizing] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024)
+  const sidebarRef = useRef(null)
+
+  // Détecte si on est sur pc
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth > 1024)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  // Initialise la variable CSS au chargement pour pc
+  useEffect(() => {
+    if (isDesktop) {
+      document.documentElement.style.setProperty('--sidebar-width', `${sidebarWidth}px`)
+    }
+  }, [sidebarWidth, isDesktop])
+
+  // Gestion du redimensionnement pour pc
+  useEffect(() => {
+    if (!isDesktop) return
+
+    const handleMouseMove = (e) => {
+      if (!isResizing) return
+      const newWidth = Math.min(Math.max(e.clientX, 250), 650)
+      setSidebarWidth(newWidth)
+      localStorage.setItem('sidebarWidth', newWidth.toString())
+      document.documentElement.style.setProperty('--sidebar-width', `${newWidth}px`)
+    }
+
+    const handleMouseUp = () => {
+      setIsResizing(false)
+    }
+
+    if (isResizing) {
+      document.addEventListener('mousemove', handleMouseMove)
+      document.addEventListener('mouseup', handleMouseUp)
+      document.body.style.cursor = 'ew-resize'
+      document.body.style.userSelect = 'none'
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseup', handleMouseUp)
+      document.body.style.cursor = ''
+      document.body.style.userSelect = ''
+    }
+  }, [isResizing, isDesktop])
+
+  const handleMouseDown = (e) => {
+    if (!isDesktop) return
+    e.preventDefault()
+    setIsResizing(true)
+  }
+
+  // Early return APRES tous les hooks
   if (!userInfo) return null
 
-  // Transforme les liens sociaux en URLs absolues
+  // Transforme les liens git et link en URL absolues
   const toAbsoluteUrl = (value, kind) => {
     if (!value) return ''
     let v = String(value).trim()
@@ -30,7 +93,26 @@ function ProfileSidebar({ userInfo, t, getAge, skillLevels }) {
   const githubUrl = toAbsoluteUrl(userInfo.github, 'github')
 
   return (
-    <aside className="profile-sidebar" role="complementary" aria-label={t('resume.profile') || 'Profile information'}>
+    <aside 
+      ref={sidebarRef}
+      className="profile-sidebar" 
+      style={isDesktop ? { width: `${sidebarWidth}px` } : {}}
+      role="complementary" 
+      aria-label={t('resume.profile') || 'Profile information'}
+    >
+      {/* profilesidebar redimensionable sur pcc*/}
+      {isDesktop && (
+        <div 
+          className="sidebar-resize-handle"
+          onMouseDown={handleMouseDown}
+          role="separator"
+          aria-label="Resize sidebar"
+          aria-orientation="vertical"
+        >
+          <div className="sidebar-resize-indicator"></div>
+        </div>
+      )}
+      
       {/* Photo de profil */}
       <img 
         src="/profile.png" 

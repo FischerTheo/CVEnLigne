@@ -1,10 +1,8 @@
-// =============================================================================
-// SCSS MIXINS - Reusable Style Patterns
-// =============================================================================
+// MIXINS SCSS - Patterns de style réutilisables
 
 @use 'variables' as *;
 
-// === Flexbox Mixins ===
+// Mixins Flexbox
 @mixin flex-center {
   display: flex;
   align-items: center;
@@ -21,7 +19,7 @@
   flex-direction: row;
 }
 
-// === Hover Effects ===
+// Effets hover
 @mixin hover-lift {
   transition: all $transition-fast;
   
@@ -39,7 +37,7 @@
   }
 }
 
-// === Shadow Mixins ===
+// Mixins ombres
 @mixin shadow-sm {
   box-shadow: 0 1px 4px $primary-shadow;
 }
@@ -56,7 +54,7 @@
   box-shadow: 0 8px 24px $hover-shadow-light;
 }
 
-// === Border Mixins ===
+// Mixins bordures
 @mixin border-standard {
   border: 1px solid $primary-border;
 }
@@ -65,7 +63,7 @@
   border: 2px solid $primary-shadow;
 }
 
-// === Button Base ===
+// Base bouton
 @mixin button-base {
   padding: $spacing-sm $spacing-xl;
   border-radius: $radius-lg;
@@ -82,7 +80,7 @@
   white-space: nowrap;
 }
 
-// === Input/Textarea Base ===
+// Base input/textarea
 @mixin input-base {
   padding: $spacing-sm;
   border: 1px solid $primary-border;
@@ -97,7 +95,7 @@
   }
 }
 
-// === Card/Section Styles ===
+// Styles carte/section
 @mixin card {
   background: $section-bg;
   border-radius: $radius-lg;
@@ -107,7 +105,7 @@
   transition: all $transition-fast;
 }
 
-// === Responsive Breakpoints (Desktop-First) ===
+// Points de rupture responsive
 // Tablet - Première adaptation (≤ 1024px)
 @mixin tablet {
   @media (max-width: 1024px) {
@@ -122,14 +120,14 @@
   }
 }
 
-// Mobile Small - Adaptation finale (≤ 480px)
+// Mobile Small - Adaptation derniere (≤ 480px)
 @mixin mobile-small {
   @media (max-width: 480px) {
     @content;
   }
 }
 
-// Legacy mobile mixin (kept for backward compatibility, = mobile-large)
+
 @mixin mobile {
   @media (max-width: 768px) {
     @content;
@@ -142,14 +140,14 @@
   }
 }
 
-// === Text Truncate ===
+// truncate
 @mixin text-truncate {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-// === Fixed Position Helper ===
+// Helper position fixe
 @mixin fixed-full {
   position: fixed;
   top: 0;

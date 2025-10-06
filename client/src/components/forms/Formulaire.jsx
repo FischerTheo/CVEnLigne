@@ -8,7 +8,7 @@ import AutoResizeTextarea from '../common/AutoResizeTextarea'
 import { useTranslation } from 'react-i18next'
 import { apiFetch, API } from '../../lib/api'
 
-// Formulaire principal du CV : gère les sections, la traduction FR/EN, l'upload PDF et la note utilisateur
+// Formulaire principal du CV : gère les sections, la traduction FR/EN, l upload PDF et la note utilisateur
 const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFormChange, showTranslateButtons = false, showAddButtons = true, forcedLang }, ref) {
   // Bouton pour traduire un champ (FR <-> EN)
   const TranslateBtn = ({ show, onClick, disabled }) => (show ? (
@@ -17,7 +17,7 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
     </button>
   ) : null)
   
-  // Table de correspondance des niveaux de compétences entre FR et EN
+  // Table de correspondance des niveaux de compétences entre FR et EN (pour garder l'ordre)
   const skillLevelsMapping = {
     fr: ['Débutant', 'Intermédiaire', 'Avancé', 'Expert'],
     en: ['Beginner', 'Intermediate', 'Advanced', 'Expert']
@@ -32,7 +32,7 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
     return index !== -1 ? toLevels[index] : value
   }
   
-  // Traduit tout le formulaire (utile pour synchroniser FR/EN)
+  // Traduit automatiquement les niveaux de compétences quand synchronisation FR/EN
   const translateFormData = (formData, fromLang, toLang) => {
     if (fromLang === toLang) return formData
     
@@ -77,15 +77,15 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
     references: [{ text: '' }],
     hobbies: [''],
   
-    projects: [{ title: '', description: '' }], // NEW: add projects field
+    projects: [{ title: '', description: '' }],
     cvPdfUrl: ''
   }
   // State principal du formulaire
   const [form, setForm] = useState(defaultForm)
-  // helper to set form state and optionally broadcast to parent
+  // Variables pour gérer la mise à jour du formulaire et la notification au parent
   const shouldBroadcastRef = useRef(false)
-  const lastChangedFieldRef = useRef(null) // for simple fields
-  const lastChangedUpdateRef = useRef(null) // { type: 'field'|'array', field, idx?, key? }
+  const lastChangedFieldRef = useRef(null) // Pour les champs simples
+  const lastChangedUpdateRef = useRef(null) // Pour les champs tableaux
   // Met à jour le formulaire et notifie le parent si besoin
   const setFormState = (updater, { silent = false } = {}) => {
     if (typeof updater === 'function') {
@@ -102,11 +102,11 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
   const [projectLoadingKey, setProjectLoadingKey] = useState(null)
   const { i18n } = useTranslation()
   const effectiveLang = forcedLang || i18n.language
-  const canRemove = !showTranslateButtons // EN form shows translate buttons => cannot remove
+  const canRemove = !showTranslateButtons 
   
 
-  // Notifie le parent après que le state ait été appliqué (jamais pendant le render)
-  // Notifie le parent à chaque modification du formulaire (pour synchronisation)
+  // Notifie le parent APRES que le state ait été appliqué 
+  // Notifie le parent à chaque modification du formulaire (pour la synchro)
   useEffect(() => {
     if (shouldBroadcastRef.current) {
       if (onFormChange) {
@@ -125,7 +125,7 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
           const translatedForm = translateFormData(form, currentLang, targetLang)
           onFormChange({ field: lastChangedFieldRef.current, value: translatedForm[lastChangedFieldRef.current] })
         } else {
-          // Fallback: send full translated form
+          // fallbacck : envoie tout le formulaire traduit
           const translatedForm = translateFormData(form, currentLang, targetLang)
           onFormChange(translatedForm)
         }
@@ -136,9 +136,9 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
     }
   }, [form, effectiveLang, onFormChange])
 
-  // Récupère les données utilisateur et projets à l'initialisation
+  // Récupère les données utilisateur et projets à l initialisation
   useEffect(() => {
-    // Fetch the correct language version
+    // Récupère la version dans la bonne langue 
     apiFetch(`/api/userinfo?lang=${effectiveLang}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -175,13 +175,13 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
           references: Array.isArray(data.references) && data.references.length > 0
             ? data.references.map(ref => typeof ref === 'object' && ref !== null && 'text' in ref ? ref : { text: ref })
             : [{ text: '' }],
-          // --- services supprimés du formulaire ---
+          //  services supprimés du formulaire 
           projects: Array.isArray(data.projects) && data.projects.length > 0
             ? data.projects
             : [{ title: '', description: '' }]
         }, { silent: true })
           
-          // Set CV PDF URL if available
+          // Définit l'URL du PDF du CV si dispo
           if (data.cvPdfUrl) setCvPdfUrl(data.cvPdfUrl)
         } else {
           setFormState(defaultForm, { silent: true })
@@ -192,7 +192,7 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
         setFormState(defaultForm, { silent: true })
       })
 
-    // Fetch projects separately
+    // Récupère les projets séparément
     apiFetch(`/api/projects?lang=${effectiveLang}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -222,7 +222,7 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
   // Gère le changement d'un champ simple du formulaire
   const handleChange = e => {
     const { name, value } = e.target
-    // remember which field triggered the change so we can sync only that field
+    // Mémorise quel champ a déclenché le changement pour synchroniser uniquement ce champ
     lastChangedFieldRef.current = name
     lastChangedUpdateRef.current = { type: 'field', field: name }
     setFormState(f => ({ ...f, [name]: value }))
@@ -276,7 +276,7 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
     if (field === 'experiences') empty = { jobTitle: '', company: '', location: '', startDate: '', endDate: '', responsibilities: '' }
     if (field === 'certifications') empty = { certName: '', certOrg: '', certDate: '', certDesc: '', pdfUrl: '' }
     if (field === 'softSkills' || field === 'references' || field === 'hobbies') empty = ''
-    if (field === 'services' || field === 'projects') empty = { title: '', description: '' } // NEW
+    if (field === 'services' || field === 'projects') empty = { title: '', description: '' }
     lastChangedUpdateRef.current = { type: 'field', field }
     setFormState(f => ({ ...f, [field]: [...f[field], empty] }))
   }
@@ -307,7 +307,7 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
     }
   }
 
-  // Upload du CV PDF (champ fichier)
+  // Upload du CV PDF 
   const handleCvUpload = async (e) => {
     const file = e.target.files[0]
     if (!file) return
@@ -323,10 +323,10 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
         },
         body: formData
       })
-      // Upload endpoint returns { filename, path }
+      // L'endpoint d'upload retourne { filename, path }
       if (response && response.path) {
         setCvPdfUrl(response.path)
-        // keep in form state so Save persists even if no other change
+        // Conserve dans le state du formulaire pour que la sauvegarde persiste même sans autre changement
         setFormState(prev => ({ ...prev, cvPdfUrl: response.path }), { silent: true })
         toast.success('CV PDF uploadé avec succès!')
       } else {
@@ -361,7 +361,7 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
   const handleSubmit = async (e) => {
     if (e && e.preventDefault) e.preventDefault()
     setMessage('')
-    // Save user info as before
+    // Sauvegarde les infos utilisateur
   try {
     await apiFetch(`/api/userinfo?lang=${effectiveLang}`, {
         method: 'POST',
@@ -371,8 +371,7 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
         },
         body: JSON.stringify({ ...form, cvPdfUrl })
       })
-      // --- services supprimés du formulaire ---
-      // Save projects (NEW)
+      // Sauvegarde les projets
     await apiFetch(`/api/projects?lang=${effectiveLang}`, {
         method: 'POST',
         headers: {
@@ -388,7 +387,6 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
   }
   }
 
-  // Expose des méthodes au parent via la ref (sauvegarde, synchronisation)
   useImperativeHandle(ref, () => ({
     saveForm: handleSubmit,
     setExternalForm: (externalForm) => {
@@ -397,12 +395,12 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
       const translatedForm = translateFormData(externalForm, sourceLang, effectiveLang)
       setFormState(translatedForm, { silent: true })
     },
-    // Set a single field coming from the partner form (already translated)
+    // Définit un champ unique provenant du formulaire partenaire (déjà traduit)
     setExternalField: (field, value) => {
       if (!field) return
       setFormState(f => ({ ...f, [field]: value }), { silent: true })
     },
-    // Set a single array cell from the partner form (already translated)
+    // Définit un élément de tableau provenant du formulaire partenaire (déjà traduit)
     setExternalArrayField: (field, idx, key, value) => {
       if (!field || typeof idx !== 'number') return
       setFormState(f => ({
@@ -483,9 +481,8 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
               effectiveLang={effectiveLang}
             />
           </section>
-          {/* Services supprimés du formulaire */}
 
-          {/* Projects (NEW) */}
+          {/* debut Projects */}
           <section className="form-section">
             <h3 className="form-section-title">Mes projets</h3>
             {form.projects.map((project, idx) => (
@@ -527,7 +524,7 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
               <button type="button" className="btn btn-add" onClick={() => addArrayItem('projects')}>Ajouter un projet</button>
             )}
           </section>
-          {/* End Projects */}
+          {/* fin Projects */}
         </form>
         {/* ToastContainer global dans App.jsx */}
       </div>

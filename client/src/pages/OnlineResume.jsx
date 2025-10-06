@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import ProfileSidebar from '../components/ProfileSidebar'
 import Carousel from '../components/Carousel' // Import Carousel component
 import { apiFetch } from '../lib/api'
+import '../styles/desktopResize.css' // Import des styles de redimensionnement desktop
 
 // calcul l'age à partir de la date de naissance
 const getAge = dob => {
@@ -40,13 +41,12 @@ function OnlineResume() {
         const data = await apiFetch(`/api/userinfo/admin?lang=${i18n.language}`)
         setUserInfo(data)
       } catch (e) {
-        // Optional: could log or show toast
         setUserInfo(null)
       }
     })()
   }, [i18n.language])
 
-  // Fetch projects for admin (public) when language changes
+  // Fetch projects pour admin (public) quand la langue change
   useEffect(() => {
     (async () => {
       try {
@@ -80,7 +80,7 @@ function OnlineResume() {
       />
       {/* Main content */}
       <main className="main-content" role="main" id="main-content">
-        {/* summary/objective et profile image */}
+        {/* summary/objective et image */}
         <section className="summary-row" aria-label={t('resume.about') || 'About and objective'}>
           <div className="summary-box">
             {/* Summary */}
@@ -106,14 +106,14 @@ function OnlineResume() {
               </article>
             )}
           </div>
-          {/* image de profile  */}
+          {/* image */}
           <img
             src="/profile.png"
             alt={`${userInfo?.fullName || 'Profile'} - Professional photo`}
             className="profile-img"
           />
         </section>
-        {/* Carousel partie */}
+        {/* Carousel section */}
         <section className="carousel-section" aria-label={t('resume.projects') || 'Projects'}>
           {projects.length > 0 && (
             <div className="carousel-container">
@@ -121,7 +121,7 @@ function OnlineResume() {
               <h2 className="carousel-title">
                 {t('resume.projects')}
               </h2>
-              {/* Carousel composent */}
+              {/* Carousel composant */}
               <Carousel
                 items={projects.map(p => ({
                   title: p.title,

@@ -1,6 +1,4 @@
-// =============================================================================
-// LOGIN PAGE - Login & Sign In Styles
-// =============================================================================
+// PAGE LOGIN - Styles de connexion et inscription
 
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
@@ -121,7 +119,7 @@
   }
 }
 
-// === Tablet Adaptations ===
+// Adaptations tablette
 @include tablet {
   .login {
     &-container {
@@ -155,7 +153,7 @@
   }
 }
 
-// === Mobile Large Adaptations ===
+// Adaptations mobile large
 @include mobile-large {
   .login {
     &-container {
@@ -174,8 +172,8 @@
     &-input {
       margin-bottom: $spacing-md-mobile;
       padding: $spacing-md-mobile;
-      font-size: 16px; // Minimum 16px to prevent iOS zoom
-      min-height: 44px; // Touch-friendly
+      font-size: 16px; // Minimum 16px 
+      min-height: 44px; 
     }
 
     &-button {
@@ -209,7 +207,7 @@
     &-input {
       margin-bottom: $spacing-md-mobile;
       padding: $spacing-md-mobile;
-      font-size: 16px; // Minimum 16px to prevent iOS zoom
+      font-size: 16px; // Minimum 16px
       min-height: 44px;
     }
 

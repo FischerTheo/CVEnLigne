@@ -18,22 +18,22 @@ export const register = async (req, res) => {
         event: 'register_invalid_password',
         email: email,
         ip: clientIp
-      }, 'Tentative d\'inscription avec mot de passe invalide')
+      }, 'Tentative d inscription invalide')
       return res.status(400).json({ 
         message: 'Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule et un chiffre' 
       })
     }
     
-    // Création de l'utilisateur avec les infos reçues
+    // Création de user
     const user = new User({ 
       username, 
-      email: email || username, // Si email non fourni, utilise le username
+      email: email || username, // Si email non fourni, utilise username
       password,
       isAdmin: isAdmin || false
     })
     await user.save()
 
-    // Log de sécurité : inscription réussie
+    // log nouvel inscrit
     logger.info({
       event: 'register_success',
       userId: user._id,
@@ -45,7 +45,7 @@ export const register = async (req, res) => {
 
     // Génère un token JWT pour auto-login après inscription
     const token = signToken({ userId: user._id })
-    // Expiration du token dans 1h
+    // Expiration du token = 1h
     const expiresAt = Date.now() + 3600 * 1000
     res.status(201).json({ 
       message: 'User registered successfully', 
@@ -64,18 +64,18 @@ export const register = async (req, res) => {
 }
 
 
-// Connexion utilisateur
+// Connexion user
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body
     const clientIp = req.ip || req.connection.remoteAddress
     
-    // Recherche l'utilisateur par email
+    // Recherche user par email
     const user = await User.findOne({ email })
     
     // Vérifie le mot de passe
     if (!user || !(await user.comparePassword(password))) {
-      // Log de sécurité : tentative de connexion échouée
+      // Log si connexion échouée
       logger.warn({
         event: 'login_failed',
         email: email,
@@ -85,7 +85,7 @@ export const login = async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials' })
     }
     
-    // Log de sécurité : connexion réussie
+    // Log si connexion réussie
     logger.info({
       event: 'login_success',
       userId: user._id,

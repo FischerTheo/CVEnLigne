@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { apiFetch, API } from '../lib/api'
 
-// Barre de navigation principale de l'application
+// Barre de navigation
 function Navbar(props) {
   const { i18n, t } = useTranslation('main')
   const navigate = useNavigate()
@@ -12,7 +12,7 @@ function Navbar(props) {
   const isAdmin = localStorage.getItem('isAdmin') === 'true'
   const formulaireRefs = props.formulaireRefs || []
   
-  // State pour le menu hamburger (mobile)
+  // State pour le menu hamburger
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   // Toggle hamburger menu
@@ -54,7 +54,7 @@ function Navbar(props) {
     let cancelled = false
     async function loadCv() {
       try {
-        // Tente d'abord la langue courante
+        // Tente d'abord la langue fr
         const data = await apiFetch(`/api/userinfo/admin?lang=${i18n.language}`)
         let url = data?.cvPdfUrl || ''
         // Si pas de CV, tente la langue alternative
@@ -85,7 +85,7 @@ function Navbar(props) {
   return (
     <nav className="navbar" role="navigation" aria-label={currentLang === 'en' ? 'Main navigation' : 'Navigation principale'}>
       <div className="navbar-left-section">
-        {/* Bouton Hamburger (mobile uniquement) */}
+        {/* Bouton Hamburger*/}
         <button
           onClick={toggleMenu}
           className={`navbar-hamburger ${isMenuOpen ? 'navbar-hamburger--open' : ''}`}
@@ -110,7 +110,7 @@ function Navbar(props) {
             aria-hidden="true"
           />
         </button>
-        {/* Boutons desktop (cachés sur mobile) */}
+        {/* Boutons desktop*/}
         <div className="navbar-desktop-btns">
           {cvUrl && (
             <a
@@ -193,7 +193,7 @@ function Navbar(props) {
         />
       )}
 
-      {/* Menu Mobile (hamburger) */}
+      {/* Menu Mobile hamburger */}
       <div className={`navbar-mobile-menu ${isMenuOpen ? 'navbar-mobile-menu--open' : ''}`}>
         {cvUrl && (
           <a

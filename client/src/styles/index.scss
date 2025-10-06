@@ -1,33 +1,28 @@
-// =============================================================================
-// MAIN SCSS FILE - Import all partials in order
-// Professional Resume Application Stylesheet
-// =============================================================================
+// FICHIER SCSS PRINCIPAL - Importe tous les partiels DANS l'ordre
 
-// === 1. ABSTRACTS (Variables & Mixins - No CSS Output) ===
+
+// ABSTRACTS (Variables & Mixins)
 @use 'scss/abstracts/variables' as *;
 @use 'scss/abstracts/mixins' as *;
 
-// === 2. BASE (Reset & Typography) ===
+// BASE (Reset & Typographie)
 @use 'scss/base/reset';
 @use 'scss/base/accessibility';
 
-// === 3. LAYOUT (Page Structure) ===
+// LAYOUT (Structure de page)
 @use 'scss/layout/main';
 @use 'scss/layout/responsive';
 
-// === 4. COMPONENTS (Reusable UI Elements) ===
+// COMPONENTS 
 @use 'scss/components/buttons';
 @use 'scss/components/navbar';
 @use 'scss/components/sidebar';
 @use 'scss/components/carousel';
 @use 'scss/components/error-boundary';
 
-// === 5. PAGES (Page-Specific Styles) ===
+// PAGES (Styles spécifiques aux pages)
 @use 'scss/pages/login';
 @use 'scss/pages/resume';
 @use 'scss/pages/parcour';
 @use 'scss/pages/forms';
 
-// =============================================================================
-// END OF MAIN STYLESHEET
-// =============================================================================

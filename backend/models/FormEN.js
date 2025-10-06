@@ -65,7 +65,7 @@ const FormENSchema = new mongoose.Schema({
   jobTitle: { type: String, default: '' },
   ville: { type: String, default: '' },
 
-  // Coordonnées
+  // CCoordonnées
   email: { type: String, default: '' },
   phone: { type: String, default: '' },
   linkedin: { type: String, default: '' },

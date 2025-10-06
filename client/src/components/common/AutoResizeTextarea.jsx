@@ -19,7 +19,7 @@ function AutoResizeTextarea({ value, placeholder, style = {}, autoWidth = false,
       textarea.style.height = textarea.scrollHeight + 'px'
     }
 
-    // Largeur auto (optionnelle), limitée à la moitié du parent
+    // Largeur auto , limitée à la moitié du parent
     if (autoWidth) {
       const parent = textarea.parentElement
       const parentCS = parent ? window.getComputedStyle(parent) : null
@@ -27,7 +27,7 @@ function AutoResizeTextarea({ value, placeholder, style = {}, autoWidth = false,
       const parentWidth = parent ? parent.clientWidth : 800
       const maxEach = Math.max(120, Math.floor((parentWidth - gap) / 2))
 
-      // Désactive temporairement le retour à la ligne pour mesurer la largeur réelle
+      // Désactive temporairement le retour à la ligne pour avoir la largeur réelle
       const prevWrap = textarea.getAttribute('wrap')
       if (prevWrap !== 'off') textarea.setAttribute('wrap', 'off')
       const prevWidth = textarea.style.width
@@ -52,7 +52,7 @@ function AutoResizeTextarea({ value, placeholder, style = {}, autoWidth = false,
     const run = () => updateSizes(textarea)
     run()
 
-    // Récalcule sur resize pour garder l'affichage correct
+    // Récalcule sur resize pour garder le bon affichage
     window.addEventListener('resize', run)
     return () => window.removeEventListener('resize', run)
   }, [value, placeholder, autoWidth])
@@ -69,7 +69,7 @@ function AutoResizeTextarea({ value, placeholder, style = {}, autoWidth = false,
         resize: 'none',
         ...style
       }}
-      // Empêche le retour à la ligne si autoWidth
+      // Empeche le retour a la ligne si autoWidth
       wrap={autoWidth ? 'off' : undefined}
       // Limite par défaut à 550 caractères sauf si désactivé
       maxLength={noLimit ? undefined : (typeof maxLength === 'number' ? maxLength : 550)}

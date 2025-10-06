@@ -18,11 +18,11 @@ import translateRoutes from './routes/translate.js'
 const logger = pino({ level: process.env.LOG_LEVEL || 'info' })
 const app = express()
 
-// ===== MIDDLEWARES DE SÉCURITÉ =====
+//  middlewares pour la sécurité
 
-// 1. Helmet - Sécurise les headers HTTP
-// En développement, on désactive CSP pour éviter les blocages
-// En production, on active une CSP stricte
+// Helmet -pour sécuriser les headers HTTP
+// En développement,CSP désactivé pour éviter les blocages
+// En production, CSP stricte
 app.use(helmet({
   contentSecurityPolicy: process.env.NODE_ENV === 'production' ? {
     directives: {
@@ -41,7 +41,7 @@ app.use(helmet({
   crossOriginResourcePolicy: { policy: "cross-origin" }
 }))
 
-// 2. CORS - Restreint aux origines autorisées
+// CORS - Restreint aux origines autorisées
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production' 
     ? process.env.CLIENT_URL || 'https://votre-domaine.com'
@@ -51,11 +51,11 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 
-// 3. Rate Limiting - Protection contre les attaques par force brute
-// Limite globale pour la production uniquement (protection DDoS)
+// Rate Limiting - Protecction contre les attaques par force brute
+// Limite globale pour la production uniquement
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Max 100 requêtes par IP en production
+  max: 200, // Max 200 requêtes par IP en production
   message: 'Trop de requêtes depuis cette IP, veuillez réessayer dans 15 minutes',
   standardHeaders: true,
   legacyHeaders: false,
@@ -64,7 +64,7 @@ const limiter = rateLimit({
 // Limite stricte pour l'authentification (TOUJOURS active, dev + prod)
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // Max 5 tentatives de connexion (strict pour sécurité)
+  max: 3, // Max 5 tentatives de connexion (strict pour sécurité)
   message: 'Trop de tentatives de connexion, réessayez dans 15 minutes',
   standardHeaders: true,
   legacyHeaders: false,
@@ -81,25 +81,21 @@ app.use(express.json())
 app.use('/api/auth/login', authLimiter)
 app.use('/api/auth/register', authLimiter)
 
-// Rate limiting global UNIQUEMENT en production (protection DDoS)
-if (process.env.NODE_ENV === 'production') {
-  app.use('/api/', limiter)
-  logger.info('Rate limiting global activé (production)')
-} else {
-  logger.info('Rate limiting global désactivé (développement) - Auth limiter actif')
-}
+// Rate limiting global désactivé même en production pour ne pas limiter l'admin
+// Les routes sensibles (auth) restent protégées par authLimiter ci-dessus
+logger.info('Rate limiting: Auth routes protégées, routes admin sans limite')
 
 
 // Sécurité : vérifie la présence de la clé JWT
 if (!process.env.JWT_SECRET) {
-  console.error('FATAL: JWT_SECRET is not defined. Set it in backend/.env')
+  console.error('ERROR: JWT_SECRET is not defined.')
   process.exit(1)
 }
 
 
 // Connexion à la base MongoDB
 mongoose.connect(process.env.DATABASE_URL)
-  .then(() => logger.info('Connexion à MongoDB réussie !'))
+  .then(() => logger.info('Connexion a MongoDB reussie !'))
   .catch(err => logger.error(err))
 
 
@@ -110,7 +106,7 @@ app.use('/api/upload', uploadRoutes)
 app.use('/api/userinfo', userInfoRoutes)
 app.use('/api/projects', projectsRoutes)
 app.use('/api/translate', translateRoutes)
-// Servir les fichiers uploadés (utiliser path.resolve pour éviter les problèmes de chemin relatif)
+// Servir les fichiers uploadés path.resolve pour les chemins relatif
 import path from 'path'
 import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
@@ -118,7 +114,7 @@ const __dirname = path.dirname(__filename)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 
-// Gestion globale des erreurs (log + réponse JSON)
+// Gestion globale des erreurs
 app.use((err, req, res, next) => {
   logger.error({ err }, 'Unhandled error')
   res.status(err.status || 500).json({ error: err.message || 'Internal Server Error' })

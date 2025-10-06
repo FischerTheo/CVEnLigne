@@ -1,6 +1,4 @@
-// =============================================================================
-// LAYOUT - Main Layout Structures
-// =============================================================================
+// LAYOUT - Structures de mise en page principales
 
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
@@ -17,7 +15,7 @@
   height: 100%;
 }
 
-// === Tablet Adaptations ===
+// Adaptations tablette
 @include tablet {
   body {
     padding-left: $sidebar-width-tablet;
@@ -28,7 +26,7 @@
   }
 }
 
-// === Mobile Large Adaptations ===
+// Adaptations mobile large
 @include mobile-large {
   body {
     padding-left: 0;

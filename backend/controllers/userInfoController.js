@@ -6,7 +6,7 @@ import { extractUserId } from '../utils/jwt.js'
 const getUserId = extractUserId
 
 
-// Récupère les infos utilisateur (profil, compétences, etc.)
+// Récupère les infos utilisateur 
 export const getUserInfo = async (req, res) => {
   try {
     const userId = getUserId(req)
@@ -23,7 +23,7 @@ export const getUserInfo = async (req, res) => {
 }
 
 
-// Met à jour les infos utilisateur (profil, compétences, etc.)
+// Met à jour les infos utilisateur 
 export const updateUserInfo = async (req, res) => {
   try {
     const userId = getUserId(req)
@@ -31,9 +31,7 @@ export const updateUserInfo = async (req, res) => {
     const lang = (req.query.lang === 'en') ? 'en' : 'fr'
     const Model = lang === 'en' ? FormEN : FormFR
     const payload = req.body || {}
-    // ici on retire les champs système pour éviter les erreurs Mongodb
     const { _id, userId: _ignoreUserId, lang: _ignoreLang, createdAt, updatedAt, __v, ...safePayload } = payload
-    // On nettoie les tableaux pour ne garder que les propriétés utiles
     const sanitizeArray = (arr, mapper) => Array.isArray(arr) ? arr.map(mapper) : []
     const sanitized = {
       ...safePayload,

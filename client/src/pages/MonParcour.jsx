@@ -10,7 +10,7 @@ function MonParcour() {
   const [references, setReferences] = useState([]);
 
   useEffect(() => {
-    // Fetch user info for experiences, certifications, references
+    // Fetch user info pour experiences, certifications, references
     apiFetch(`/api/userinfo/admin?lang=${i18n.language}`)
       .then(data => {
         setExperiences(Array.isArray(data?.experiences) ? data.experiences : []);
@@ -28,7 +28,6 @@ function MonParcour() {
     <div className="parcour-container">
       <h1 className="parcour-title">{t('resume.monParcour')}</h1>
       <div className="parcour-content">
-        {/* Références Column - maintenant à gauche */}
         <div className="parcour-column">
           <div className="parcour-section-title">Références</div>
           <ul className="parcour-list">
@@ -40,7 +39,7 @@ function MonParcour() {
             ))}
           </ul>
         </div>
-        {/* Experiences Column */}
+        {/* Experiences ccolonne */}
         <div className="parcour-column">
           <div className="parcour-section-title">Expériences professionnelles</div>
           <ul className="parcour-list">
@@ -55,7 +54,7 @@ function MonParcour() {
             ))}
           </ul>
         </div>
-        {/* Certifications Column */}
+        {/* Certifications colonne */}
         <div className="parcour-column">
           <div className="parcour-section-title">Certifications</div>
           <ul className="parcour-list">

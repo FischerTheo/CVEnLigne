@@ -47,7 +47,7 @@ function App() {
 
   return (
     <Router>
-      {/* Skip link for keyboard navigation */}
+      {/* Skip link pour navigation clavier */}
       <a href="#main-content" className="skip-link">
         {isAdmin ? 'Aller au contenu principal' : 'Skip to main content'}
       </a>
@@ -74,7 +74,7 @@ function App() {
         <Route path="/" element={
           <OnlineResume onLogout={handleLogout} />
         } />
-        {/* Redirection pour toute route inconnue */}
+        {/* Redirection pour toute route inacessible */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       {/* ToastContainer global pour notifications */}

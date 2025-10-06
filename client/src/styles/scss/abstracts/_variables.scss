@@ -1,25 +1,23 @@
-// =============================================================================
-// SCSS VARIABLES - Centralized Design Tokens
-// =============================================================================
+// VARIABLES SCSS - Tokens de design centralisés
 
-// === Color Palette ===
-$primary-bg: #f8fafc;           // Main background color - light gray blue
-$primary-shadow: #978e8c;       // Primary accent/shadow color
-$primary-border: #e2e8f0;       // Border color - light gray
-$text-color: #1e293b;           // Unified text color - dark slate
-$section-bg: #ffffff;           // Section background - pure white
-$button-bg: #3b82f6;            // Button background - blue
-$secondary-accent: #64748b;     // Secondary accent color - slate gray
+// Palette de couleurs
+$primary-bg: #f8fafc;           // Couleur de fond principale - gris bleu clair
+$primary-shadow: #978e8c;       // Couleur d'accent/ombre principale
+$primary-border: #e2e8f0;       // Couleur de bordure - gris clair
+$text-color: #1e293b;           // Couleur de texte unifiée - ardoise foncée
+$section-bg: #ffffff;           // Fond de section - blanc pur
+$button-bg: #3b82f6;            // Fond de bouton - bleu
+$secondary-accent: #64748b;     // Couleur d'accent secondaire - gris ardoise
 
-// === Hover States ===
-$hover-bg-primary: #3e5881;     // Primary hover background
-$hover-bg-button: #2563eb;      // Button hover background
-$hover-bg-danger: #b71c1c;      // Danger button hover
-$hover-shadow-light: rgba(59, 130, 246, 0.15);  // Light blue shadow for hover
-$hover-transform-scale: 1.1;    // Scale transform for hover
-$hover-transform-translate: -2px; // Translate transform for hover
+// États hover
+$hover-bg-primary: #3e5881;     // Fond hover principal
+$hover-bg-button: #2563eb;      // Fond hover de bouton
+$hover-bg-danger: #b71c1c;      // Hover bouton danger
+$hover-shadow-light: rgba(59, 130, 246, 0.15);  // Ombre bleue claire pour hover
+$hover-transform-scale: 1.1;    // Échelle transform pour hover
+$hover-transform-translate: -2px; // Translation transform pour hover
 
-// === Typography ===
+// Typographie
 $font-sm: 15px;
 $font-md: 16px;
 $font-lg: 18px;
@@ -27,7 +25,7 @@ $font-xl: 24px;
 $font-xxl: 28px;
 $font-xxxl: 32px;
 
-// === Spacing ===
+// Espacement
 $spacing-xs: 2px;
 $spacing-sm: 4px;
 $spacing-md: 8px;
@@ -38,7 +36,7 @@ $spacing-xxxl: 24px;
 $spacing-huge: 32px;
 $spacing-giant: 48px;
 
-// === Border Radius ===
+// Arrondis de bordure
 $radius-sm: 6px;
 $radius-md: 8px;
 $radius-lg: 10px;
@@ -47,10 +45,10 @@ $radius-xxl: 16px;
 $radius-xxxl: 18px;
 $radius-huge: 24px;
 
-// === Transitions ===
+// Transitions
 $transition-fast: 0.2s;
 
-// === Layout ===
+// Layout
 $navbar-height: 64px;
 $navbar-height-tablet: 56px;
 $sidebar-width: 425px;
@@ -58,7 +56,7 @@ $sidebar-width-tablet: 250px;
 $note-container-width: 320px;
 $note-container-width-tablet: 240px;
 
-// === Font sizes tablet (base réduite à 13px) ===
+// Tailles de police tablette (base réduite à 13px)
 $font-xs-tablet: 11px;
 $font-sm-tablet: 12px;
 $font-md-tablet: 13px;
@@ -66,7 +64,7 @@ $font-lg-tablet: 14px;
 $font-xl-tablet: 16px;
 $font-xxl-tablet: 18px;
 
-// === Spacing tablet (réduit de 50%) ===
+// Espacement tablette (réduit de 50%)
 $spacing-xs-tablet: 1px;
 $spacing-sm-tablet: 2px;
 $spacing-md-tablet: 4px;
@@ -76,7 +74,7 @@ $spacing-xxl-tablet: 10px;
 $spacing-xxxl-tablet: 12px;
 $spacing-huge-tablet: 16px;
 
-// === Font sizes mobile-large (base 14px, lisible) ===
+// Tailles de police mobile-large (base 14px, lisible)
 $font-xs-mobile: 12px;
 $font-sm-mobile: 13px;
 $font-md-mobile: 14px;
@@ -84,7 +82,7 @@ $font-lg-mobile: 16px;
 $font-xl-mobile: 18px;
 $font-xxl-mobile: 20px;
 
-// === Spacing mobile-large (compact mais touch-friendly) ===
+// Espacement mobile-large (compact mais touch-friendly)
 $spacing-xs-mobile: 2px;
 $spacing-sm-mobile: 4px;
 $spacing-md-mobile: 8px;
@@ -93,7 +91,7 @@ $spacing-xl-mobile: 16px;
 $spacing-xxl-mobile: 20px;
 $spacing-xxxl-mobile: 24px;
 
-// === Layout mobile-large ===
+// Layout mobile-large
 $navbar-height-mobile: 52px;
 $sidebar-width-mobile: 100%;
 $container-width-mobile: 90%; // Largeur adaptative pour form-container et note-container (90% de l'écran)

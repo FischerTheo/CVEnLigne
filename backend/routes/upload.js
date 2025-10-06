@@ -32,7 +32,7 @@ router.post('/pdf', upload.single('pdf'), (req, res) => {
   res.json({ filename: req.file.filename, path: `/uploads/pdfs/${req.file.filename}` })
 })
 
-// Suppression d'un PDF via son chemin (?path=/uploads/pdfs/nom.pdf)
+// Suppression d'un PDF via son chemin (?path=/uploads/pdfs/x.pdf)
 router.delete('/pdf', (req, res) => {
   const relPath = req.query.path
   if (!relPath || typeof relPath !== 'string') {

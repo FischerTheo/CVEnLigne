@@ -1,14 +1,10 @@
-// =============================================================================
-// RESPONSIVE - Media Queries for Mobile/Tablet (Desktop-First)
-// =============================================================================
+// RESPONSIVE - Media Queries Mobile/Tablette (Desktop-First)
 
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-// =============================================================================
 // NIVEAU 1 : TABLETTE (≤ 1024px)
-// Objectif : Vue d'ensemble complète - réduction massive (50%)
-// =============================================================================
+// Objectif : Vue d'ensemble complète
 @include tablet {
   body {
     padding-left: $sidebar-width-tablet;
@@ -34,10 +30,8 @@
   }
 }
 
-// =============================================================================
 // NIVEAU 2 : MOBILE LARGE (≤ 769px)
-// Objectif : Layout 100% vertical, sidebar en haut, navigation mobile
-// =============================================================================
+// Objectif : Layout vertical, sidebar en haut, navigation mobile
 @include mobile-large {
   body {
     padding-left: 0;
@@ -99,17 +93,8 @@
   }
 }
 
-// =============================================================================
-// NIVEAU 3 : MOBILE SMALL (≤ 480px) - À implémenter plus tard
-// Objectif : Optimisation extrême, touch-first
-// =============================================================================
-@include mobile-small {
-  // TODO: Implémentation Niveau 3
-}
 
-// =============================================================================
-// LEGACY MOBILE (≤ 768px) - Conservé pour compatibilité
-// =============================================================================
+// MOBILE ≤ 768px
 @include mobile {
   .main-flex {
     flex-direction: column;

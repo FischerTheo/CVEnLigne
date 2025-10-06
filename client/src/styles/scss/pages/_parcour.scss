@@ -1,6 +1,4 @@
-// =============================================================================
-// MON PARCOUR PAGE - Career Path Display
-// =============================================================================
+// PAGE MON PARCOURS - Affichage du parcours professionnel
 
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
@@ -118,7 +116,7 @@
   }
 }
 
-// === Tablet Adaptations ===
+// Adaptations tablette
 @include tablet {
   .parcour {
     &-container {
@@ -193,7 +191,7 @@
   }
 }
 
-// === Mobile Large Adaptations ===
+// Adaptations mobile large
 @include mobile-large {
   .parcour {
     &-container {

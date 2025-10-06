@@ -1,6 +1,4 @@
-// =============================================================================
-// FORMS - Form Components & Styles
-// =============================================================================
+// FORMULAIRES - Composants et styles de formulaires
 
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
@@ -33,7 +31,7 @@
       margin: $spacing-md 0;
     }
 
-    // Override note-textarea to allow full height
+    // Surcharge note-textarea pour permettre hauteur complète
     .note-textarea {
       max-height: none !important;
     }
@@ -123,7 +121,7 @@
   }
 }
 
-// === Certification Form Styles ===
+// Styles de formulaire de certification
 .form-certification-container {
   margin-bottom: $spacing-lg;
   padding: $spacing-md;
@@ -143,7 +141,7 @@
   }
 }
 
-// === Dual Forms (FR/EN) ===
+// Formulaires doubles (FR/EN)
 .formulaire-container {
   @include flex-row;
   align-items: flex-start;
@@ -167,7 +165,7 @@
   }
 }
 
-// === Professional Summary Section ===
+// Section résumé professionnel
 .professional-summary {
   &-row {
     @include flex-row;
@@ -187,7 +185,7 @@
   }
 }
 
-// === PDF Upload Sections ===
+// Sections upload PDF
 .cert-pdf {
   &-label {
     font-weight: 600;
@@ -224,7 +222,7 @@
   margin-bottom: $spacing-md;
 }
 
-// === CV Upload Section ===
+// Section upload CV
 .flex-center-start {
   @include flex-row;
   justify-content: center;
@@ -254,7 +252,7 @@
   }
 }
 
-// === Note Container ===
+// Conteneur notes
 .note {
   &-container {
     position: absolute;
@@ -265,7 +263,7 @@
   }
 }
 
-// === Tablet Adaptations ===
+// Adaptations tablette
 @include tablet {
   .formulaire-container {
     gap: $spacing-lg-tablet;
@@ -412,19 +410,19 @@
   }
 }
 
-// === Mobile Large Adaptations ===
+// Adaptations mobile large
 @include mobile-large {
   .formulaire-container {
     padding-top: 75px; // Espacement sous navbar
   }
 
   .flex-center-start {
-    flex-direction: column; // Empile
+    flex-direction: column; // en colonne
     align-items: stretch;
   }
   .note-container {
-    position: static; // déjà retiré
-    order: 2; // après le formulaire
+    position: static; 
+    order: 2; // après le formulaire fr
     width: 100%;
     max-width: 100%;
     margin-top: $spacing-xl;

@@ -1,6 +1,4 @@
-// =============================================================================
-// ONLINE RESUME PAGE - Resume Display Styles
-// =============================================================================
+// PAGE CV EN LIGNE - Styles d'affichage du CV
 
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
@@ -57,7 +55,7 @@
   padding-bottom: $spacing-md;
 }
 
-// === Tablet Adaptations ===
+// Adaptations tablette
 @include tablet {
   .summary {
     &-row {
@@ -91,7 +89,7 @@
   }
 }
 
-// === Mobile Large Adaptations ===
+// Adaptations mobile large
 @include mobile-large {
   .summary {
     &-row {

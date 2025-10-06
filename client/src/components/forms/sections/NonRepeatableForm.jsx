@@ -22,7 +22,7 @@ function NonRepeatableForm({ form, handleChange, showTranslateButtons }) {
       if (translatedText === text) {
         toast.info('Aucune modification (peut-être déjà traduit).')
       } else {
-        // propagate change to parent
+        // propage le changement au parent
         handleChange({ target: { name: fieldName, value: translatedText } })
         toast.success('Traduction appliquée.')
       }
