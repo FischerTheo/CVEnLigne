@@ -42,10 +42,25 @@ app.use(helmet({
 }))
 
 // CORS - Restreint aux origines autorisées
+const allowedOrigins = process.env.NODE_ENV === 'production'
+  ? [
+      'https://resume-frontend-it83.onrender.com',
+      process.env.CLIENT_URL,
+    ].filter(Boolean)
+  : ['http://localhost:5173', 'http://127.0.0.1:5173']
+
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' 
-    ? process.env.CLIENT_URL || 'https://votre-domaine.com'
-    : ['http://localhost:5173', 'http://127.0.0.1:5173'],
+  origin: (origin, callback) => {
+    // Autorise les requêtes sans origin (comme les apps mobiles ou curl)
+    if (!origin) return callback(null, true)
+    
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      logger.warn({ origin, allowedOrigins }, 'CORS: Origine non autorisée')
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
   credentials: true,
   optionsSuccessStatus: 200
 }
