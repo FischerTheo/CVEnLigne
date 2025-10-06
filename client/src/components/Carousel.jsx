@@ -12,22 +12,36 @@ function Carousel({ items }) {
   const next = () => setIndex(i => (i + 1) % total)
 
   return (
-    <div className="carousel-wrapper">
+    <div className="carousel-wrapper" role="region" aria-label="Projects carousel" aria-roledescription="carousel">
       {/* Flèche gauche */}
-      <button onClick={prev} className="carousel-arrow carousel-arrow-left" aria-label="Previous"></button>
+        <button 
+          onClick={prev} 
+          className="carousel-arrow carousel-arrow-left" 
+          aria-label="Previous projects"
+          type="button"
+        >
+          ←
+        </button>
       {/* Affichage des éléments */}
-      <div className="carousel-items">
+      <div className="carousel-items" role="group" aria-live="polite">
         {visible.map((item, i) => (
-          <div key={i} className="carousel-item">
+          <article key={i} className="carousel-item" aria-label={`Project: ${item.title}`}>
             {/* Titre de l'élément */}
-            <div className="carousel-item-title">{item.title}</div>
+            <h3 className="carousel-item-title">{item.title}</h3>
             {/* Contenu de l'élément */}
-            <div className="carousel-item-content">{item.content}</div>
-          </div>
+            <p className="carousel-item-content">{item.content}</p>
+          </article>
         ))}
       </div>
       {/* Flèche droite */}
-      <button onClick={next} className="carousel-arrow carousel-arrow-right" aria-label="Next"></button>
+        <button 
+          onClick={next} 
+          className="carousel-arrow carousel-arrow-right" 
+          aria-label="Next projects"
+          type="button"
+        >
+          →
+        </button>
     </div>
   )
 }

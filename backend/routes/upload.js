@@ -28,6 +28,7 @@ const upload = multer({
 // Upload d'un fichier PDF
 router.post('/pdf', upload.single('pdf'), (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'Aucun fichier envoyé' })
+  // Le path doit correspondre à la route statique /uploads qui sert le dossier uploads/
   res.json({ filename: req.file.filename, path: `/uploads/pdfs/${req.file.filename}` })
 })
 

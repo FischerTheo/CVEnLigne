@@ -1,0 +1,356 @@
+// =============================================================================
+// NAVBAR - Navigation Bar Component
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: $navbar-height;
+  @include flex-row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 36px;
+  width: 100%;
+  background: $primary-bg;
+  border-bottom: 2px solid $primary-shadow;
+  box-shadow: 0 2px 12px $primary-shadow;
+  z-index: 1000;
+  border-radius: 0 0 $radius-xxxl $radius-xxxl;
+  box-sizing: border-box;
+
+  &-left-section {
+    @include flex-row;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 0 0 auto;
+  }
+
+  &-logo-section {
+    @include flex-row;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xl;
+    flex: 1;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &-logo {
+    font-weight: bold;
+    font-size: $font-xl;
+    color: $text-color;
+    text-decoration: none;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  &-lang-btn {
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  &-lang-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  &-cv-btn {
+    background: #fff;
+    color: #1976d2;
+    border: 1.5px solid #1976d2;
+    border-radius: $radius-md;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 14px;
+    margin-left: $spacing-huge;
+    @include shadow-md;
+    text-decoration: none !important;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: #1976d2;
+      color: #fff;
+      border-color: #1976d2;
+    }
+  }
+
+  &-nav-section {
+    @include flex-row;
+    gap: $spacing-lg;
+    align-items: center;
+    flex: 0 0 auto;
+  }
+
+  &-btn {
+    padding: $spacing-md $spacing-lg;
+    border-radius: $spacing-md;
+    @include border-thick;
+    color: white;
+    background: $secondary-accent;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 12px $primary-shadow;
+    font-size: $font-md;
+    letter-spacing: 0.5px;
+    transition: $transition-fast;
+    min-width: auto;
+    max-width: none;
+    overflow: visible;
+    text-overflow: initial;
+    white-space: nowrap;
+
+    &:hover {
+      background: $hover-bg-primary;
+      transform: translateY($hover-transform-translate);
+    }
+  }
+
+  &-save-btn {
+    margin-left: $spacing-lg;
+  }
+
+  &-login-btn {
+    padding: $spacing-md $spacing-lg;
+    border-radius: $spacing-md;
+    @include border-thick;
+    background: $secondary-accent;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 12px $primary-shadow;
+    font-size: $font-md;
+    letter-spacing: 0.5px;
+    transition: $transition-fast;
+    min-width: 120px;
+    max-width: 160px;
+    @include text-truncate;
+  }
+}
+
+// === Tablet Adaptations ===
+@include tablet {
+  .navbar {
+    height: $navbar-height-tablet;
+    padding: 0 $spacing-md-tablet;
+
+    &-logo {
+      font-size: $font-lg-tablet;
+    }
+
+    &-lang-icon {
+      width: 22px;
+      height: 22px;
+    }
+
+    &-cv-btn {
+      margin-left: $spacing-md-tablet;
+      padding: 2px 8px;
+      font-size: $font-xs-tablet;
+    }
+
+    &-nav-section {
+      gap: $spacing-xs-tablet;
+    }
+
+    &-btn {
+      padding: $spacing-xs-tablet $spacing-md-tablet;
+      font-size: $font-sm-tablet;
+    }
+
+    &-save-btn {
+      margin-left: $spacing-sm-tablet;
+    }
+
+    &-login-btn {
+      min-width: 80px;
+      max-width: 120px;
+      font-size: $font-sm-tablet;
+      padding: $spacing-xs-tablet $spacing-md-tablet;
+    }
+  }
+}
+
+// === Hamburger Menu (hidden on desktop) ===
+.navbar-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 1002;
+  position: relative;
+
+  &-line {
+    width: 100%;
+    height: 3px;
+    background-color: $text-color;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  &--open {
+    .navbar-hamburger-line {
+      &:nth-child(1) {
+        transform: rotate(45deg) translateY(10px);
+      }
+      &:nth-child(2) {
+        opacity: 0;
+      }
+      &:nth-child(3) {
+        transform: rotate(-45deg) translateY(-10px);
+      }
+    }
+  }
+}
+
+// Desktop buttons wrapper (hidden on mobile)
+.navbar-desktop-btns {
+  display: flex;
+  align-items: center;
+}
+
+// Mobile menu overlay (to close menu when clicking outside)
+.navbar-mobile-overlay {
+  display: none;
+  position: fixed;
+  top: $navbar-height;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+// Mobile menu (hidden by default)
+.navbar-mobile-menu {
+  display: none;
+  position: fixed;
+  top: $navbar-height;
+  left: 0;
+  width: 100%;
+  background: $section-bg;
+  box-shadow: 0 4px 12px $primary-shadow;
+  z-index: 1001;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+
+  &--open {
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+
+  &-item {
+    display: block;
+    width: 100%;
+    padding: $spacing-lg $spacing-xl;
+    border: none;
+    background: transparent;
+    text-align: left;
+    font-size: $font-md;
+    color: $text-color;
+    text-decoration: none;
+    border-bottom: 1px solid $primary-border;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:hover,
+    &:focus {
+      background: $primary-bg;
+    }
+  }
+}
+
+// === Mobile Large Adaptations ===
+@include mobile-large {
+  .navbar {
+    height: $navbar-height-mobile;
+    padding: 0 $spacing-md-mobile;
+
+    &-left-section {
+      flex: 0 0 auto;
+      margin-right: $spacing-md-mobile;
+    }
+
+    &-logo-section {
+      position: static;
+      transform: none;
+      flex: 1;
+      justify-content: center;
+      gap: $spacing-md-mobile;
+    }
+
+    &-logo {
+      font-size: $font-md-mobile;
+      letter-spacing: 0.5px;
+    }
+
+    &-lang-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    &-lang-btn {
+      padding: $spacing-sm-mobile;
+    }
+
+    &-cv-btn {
+      padding: $spacing-sm-mobile $spacing-md-mobile;
+      font-size: $font-xs-mobile;
+      margin-left: $spacing-sm-mobile;
+    }
+
+    // Afficher le hamburger sur mobile
+    &-hamburger {
+      display: flex;
+      margin-left: $spacing-sm-mobile;
+    }
+
+    // Cacher les boutons desktop sur mobile
+    &-desktop-btns {
+      display: none;
+    }
+
+    // Cacher la nav section desktop sur mobile
+    &-nav-section {
+      display: none;
+    }
+
+    // Cacher le bouton save du logo-section sur mobile
+    &-save-btn {
+      display: none;
+    }
+
+    // Afficher le menu mobile
+    &-mobile-menu {
+      display: block;
+      top: $navbar-height-mobile;
+
+      &-item {
+        padding: $spacing-lg-mobile $spacing-xl-mobile;
+        font-size: $font-md-mobile;
+        min-height: 52px;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+      }
+    }
+
+    // Afficher l'overlay sur mobile
+    &-mobile-overlay {
+      display: block;
+      top: $navbar-height-mobile;
+    }
+  }
+}

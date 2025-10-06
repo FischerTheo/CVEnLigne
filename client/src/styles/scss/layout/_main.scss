@@ -1,0 +1,48 @@
+// =============================================================================
+// LAYOUT - Main Layout Structures
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.main-flex {
+  @include flex-row;
+  min-height: 100vh;
+  background: $primary-bg;
+}
+
+.main-content {
+  flex: 1;
+  @include flex-column;
+  height: 100%;
+}
+
+// === Tablet Adaptations ===
+@include tablet {
+  body {
+    padding-left: $sidebar-width-tablet;
+  }
+
+  .main-content {
+    padding: $spacing-md-tablet;
+  }
+}
+
+// === Mobile Large Adaptations ===
+@include mobile-large {
+  body {
+    padding-left: 0;
+    padding-top: 0;
+  }
+
+  .main-flex {
+    flex-direction: column;
+    padding-top: $navbar-height-mobile;
+  }
+
+  .main-content {
+    padding: $spacing-lg-mobile;
+    width: 100%;
+    min-height: calc(100vh - $navbar-height-mobile);
+  }
+}

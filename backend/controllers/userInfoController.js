@@ -44,6 +44,7 @@ export const updateUserInfo = async (req, res) => {
       certifications: sanitizeArray(safePayload.certifications, ({ certName = '', certOrg = '', certDate = '', certDesc = '', pdfUrl = '' }) => ({ certName, certOrg, certDate, certDesc, pdfUrl })),
       references: sanitizeArray(safePayload.references, (item) => (typeof item === 'object' && item !== null && 'text' in item) ? ({ text: item.text || '' }) : ({ text: String(item || '') })),
       hobbies: Array.isArray(safePayload.hobbies) ? safePayload.hobbies.map(h => String(h || '')) : [],
+      projects: sanitizeArray(safePayload.projects, ({ title = '', description = '' }) => ({ title, description })),
       cvPdfUrl: safePayload.cvPdfUrl || ''
     }
     // Met à jour ou crée le document utilisateur

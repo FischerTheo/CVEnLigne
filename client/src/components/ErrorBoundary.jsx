@@ -17,9 +17,9 @@ export default class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div style={{ padding: 24 }}>
+        <div className="error-boundary-container">
           <h2>Une erreur est survenue</h2>
-          <pre style={{ whiteSpace: 'pre-wrap' }}>{String(this.state.error?.message || this.state.error)}</pre>
+          <pre className="error-boundary-message">{String(this.state.error?.message || this.state.error)}</pre>
         </div>
       )
     }

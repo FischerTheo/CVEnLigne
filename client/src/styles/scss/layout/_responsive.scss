@@ -1,0 +1,164 @@
+// =============================================================================
+// RESPONSIVE - Media Queries for Mobile/Tablet (Desktop-First)
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// =============================================================================
+// NIVEAU 1 : TABLETTE (≤ 1024px)
+// Objectif : Vue d'ensemble complète - réduction massive (50%)
+// =============================================================================
+@include tablet {
+  body {
+    padding-left: $sidebar-width-tablet;
+  }
+
+  .formulaire-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: $spacing-lg-tablet;
+    padding: $spacing-md-tablet 0;
+    margin: 0;
+  }
+
+  .form-block {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 $spacing-md-tablet;
+  }
+
+  // Ajustements globaux pour tablette
+  .flex-center-start {
+    padding: $spacing-md-tablet 0;
+  }
+}
+
+// =============================================================================
+// NIVEAU 2 : MOBILE LARGE (≤ 769px)
+// Objectif : Layout 100% vertical, sidebar en haut, navigation mobile
+// =============================================================================
+@include mobile-large {
+  body {
+    padding-left: 0;
+  }
+
+  .main-flex {
+    flex-direction: column;
+  }
+
+  .profile-sidebar {
+    position: relative;
+    width: 100%;
+    top: 0;
+    height: auto;
+    border-radius: 0;
+  }
+
+  .formulaire-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: $spacing-lg-mobile;
+    padding: $spacing-md-mobile;
+  }
+
+  .form-block {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .summary-row {
+    flex-direction: column;
+    height: auto;
+    gap: $spacing-lg-mobile;
+  }
+
+  .summary-box {
+    flex-direction: column;
+    gap: $spacing-lg-mobile;
+  }
+
+  .navbar {
+    padding: 0 $spacing-sm-mobile;
+
+    &-nav-section {
+      margin-left: $spacing-sm-mobile;
+      gap: $spacing-xs-mobile;
+    }
+  }
+
+  .parcour-content {
+    flex-direction: column;
+    gap: $spacing-xl-mobile;
+  }
+
+  .flex-center-start {
+    padding: $spacing-md-mobile;
+    flex-direction: column;
+  }
+}
+
+// =============================================================================
+// NIVEAU 3 : MOBILE SMALL (≤ 480px) - À implémenter plus tard
+// Objectif : Optimisation extrême, touch-first
+// =============================================================================
+@include mobile-small {
+  // TODO: Implémentation Niveau 3
+}
+
+// =============================================================================
+// LEGACY MOBILE (≤ 768px) - Conservé pour compatibilité
+// =============================================================================
+@include mobile {
+  .main-flex {
+    flex-direction: column;
+  }
+
+  .profile-sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    top: 0;
+  }
+
+  body {
+    padding-left: 0;
+  }
+
+  .summary-row {
+    flex-direction: column;
+    height: auto;
+    gap: $spacing-xl;
+  }
+
+  .summary-box {
+    flex-direction: column;
+    gap: $spacing-xl;
+  }
+
+  .navbar {
+    padding: 0 $spacing-lg;
+
+    &-nav-section {
+      margin-left: $spacing-md;
+      gap: $spacing-md;
+    }
+  }
+
+  .parcour-content {
+    flex-direction: column;
+    gap: $spacing-xl;
+  }
+
+  .formulaire-container {
+    flex-direction: column;
+    padding: $spacing-md;
+  }
+
+  .form-block {
+    width: 100%;
+    padding: $spacing-md;
+  }
+}

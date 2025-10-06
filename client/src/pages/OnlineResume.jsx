@@ -8,8 +8,6 @@ import { apiFetch } from '../lib/api'
 const getAge = dob => {
   if (!dob || !/^\d{2}\/\d{2}\/\d{4}$/.test(dob)) return '';
   const [day, month, year] = dob.split('/').map(Number);
-  // Page principale du CV en ligne
-  // Affiche les infos utilisateur, projets, compétences, résumé et objectif
   const d = new Date(year, month - 1, day);
   if (isNaN(d.getTime())) return '';
   const t = new Date();
@@ -39,13 +37,11 @@ function OnlineResume() {
   useEffect(() => {
     (async () => {
       try {
-  // Composant principal OnlineResume
         const data = await apiFetch(`/api/userinfo/admin?lang=${i18n.language}`)
         setUserInfo(data)
       } catch (e) {
         // Optional: could log or show toast
         setUserInfo(null)
-    // Récupère les infos utilisateur à chaque changement de langue
       }
     })()
   }, [i18n.language])
@@ -58,7 +54,6 @@ function OnlineResume() {
         setProjects(Array.isArray(data) ? data : [])
       } catch (e) {
         setProjects([])
-    // Récupère les projets à chaque changement de langue
       }
     })()
   }, [i18n.language])
@@ -70,7 +65,6 @@ function OnlineResume() {
     const userLevels = Array.from(new Set(userInfo.skills.map(sk => sk.level)));
     return [
       ...orderedLevels.filter(lvl => userLevels.includes(lvl)),
-    // Calcule les niveaux de compétence à afficher
       ...userLevels.filter(lvl => !orderedLevels.includes(lvl))
     ];
   }, [userInfo, i18n.language]);
@@ -85,48 +79,48 @@ function OnlineResume() {
         skillLevels={skillLevels}
       />
       {/* Main content */}
-  <div className="main-content">
+      <main className="main-content" role="main" id="main-content">
         {/* summary/objective et profile image */}
-        <div className="summary-row">
+        <section className="summary-row" aria-label={t('resume.about') || 'About and objective'}>
           <div className="summary-box">
             {/* Summary */}
             {userInfo?.summary && (
-              <div className="summary-section">
-                <div className="summary-title">
+              <article className="summary-section">
+                <h2 className="summary-title">
                   {t('resume.about')}
-                </div>
-                <div className="summary-text">
+                </h2>
+                <p className="summary-text">
                   {userInfo.summary}
-                </div>
-              </div>
+                </p>
+              </article>
             )}
             {/* Objective */}
             {userInfo?.objective && (
-              <div className="summary-section">
-                <div className="summary-title">
+              <article className="summary-section">
+                <h2 className="summary-title">
                   {t('resume.objective')}
-                </div>
-                <div className="summary-text">
+                </h2>
+                <p className="summary-text">
                   {userInfo.objective}
-                </div>
-              </div>
+                </p>
+              </article>
             )}
           </div>
           {/* image de profile  */}
           <img
             src="/profile.png"
-            alt="Profile"
+            alt={`${userInfo?.fullName || 'Profile'} - Professional photo`}
             className="profile-img"
           />
-        </div>
+        </section>
         {/* Carousel partie */}
-        <div className="carousel-section">
+        <section className="carousel-section" aria-label={t('resume.projects') || 'Projects'}>
           {projects.length > 0 && (
             <div className="carousel-container">
               {/* Carousel titre */}
-              <div className="carousel-title">
+              <h2 className="carousel-title">
                 {t('resume.projects')}
-              </div>
+              </h2>
               {/* Carousel composent */}
               <Carousel
                 items={projects.map(p => ({
@@ -136,8 +130,8 @@ function OnlineResume() {
               />
             </div>
           )}
-        </div>
-      </div>
+        </section>
+      </main>
     </div>
   )
 }

@@ -1,0 +1,92 @@
+// =============================================================================
+// ACCESSIBILITY - Focus styles and keyboard navigation
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// === Focus visible styles ===
+*:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+*:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+  border-radius: $radius-sm;
+}
+
+// === Skip link ===
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: $button-bg;
+  color: white;
+  padding: $spacing-md $spacing-lg;
+  text-decoration: none;
+  border-radius: $radius-md;
+  z-index: 100;
+  font-weight: 600;
+
+  &:focus {
+    top: $spacing-md;
+    left: $spacing-md;
+    outline: 3px solid white;
+  }
+}
+
+// === Better focus for interactive elements ===
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}
+
+// === Reduced motion for accessibility ===
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// === High contrast mode support ===
+@media (prefers-contrast: high) {
+  * {
+    border-color: currentColor;
+  }
+
+  button,
+  a {
+    outline: 2px solid currentColor;
+  }
+}
+
+// === Screen reader only class ===
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// === Focus trap for modals ===
+.focus-trap {
+  &:focus {
+    outline: none;
+  }
+}

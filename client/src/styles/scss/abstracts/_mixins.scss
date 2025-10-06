@@ -1,0 +1,159 @@
+// =============================================================================
+// SCSS MIXINS - Reusable Style Patterns
+// =============================================================================
+
+@use 'variables' as *;
+
+// === Flexbox Mixins ===
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+// === Hover Effects ===
+@mixin hover-lift {
+  transition: all $transition-fast;
+  
+  &:hover {
+    transform: translateY($hover-transform-translate);
+    box-shadow: 0 8px 24px $hover-shadow-light;
+  }
+}
+
+@mixin hover-scale {
+  transition: transform $transition-fast;
+  
+  &:hover {
+    transform: scale($hover-transform-scale);
+  }
+}
+
+// === Shadow Mixins ===
+@mixin shadow-sm {
+  box-shadow: 0 1px 4px $primary-shadow;
+}
+
+@mixin shadow-md {
+  box-shadow: 0 2px 8px $primary-shadow;
+}
+
+@mixin shadow-lg {
+  box-shadow: 0 4px 16px $primary-shadow;
+}
+
+@mixin shadow-xl {
+  box-shadow: 0 8px 24px $hover-shadow-light;
+}
+
+// === Border Mixins ===
+@mixin border-standard {
+  border: 1px solid $primary-border;
+}
+
+@mixin border-thick {
+  border: 2px solid $primary-shadow;
+}
+
+// === Button Base ===
+@mixin button-base {
+  padding: $spacing-sm $spacing-xl;
+  border-radius: $radius-lg;
+  border: 1px solid $primary-border;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: $font-sm;
+  letter-spacing: 0.5px;
+  transition: all $transition-fast;
+  min-width: auto;
+  max-width: none;
+  overflow: visible;
+  text-overflow: initial;
+  white-space: nowrap;
+}
+
+// === Input/Textarea Base ===
+@mixin input-base {
+  padding: $spacing-sm;
+  border: 1px solid $primary-border;
+  border-radius: $radius-md;
+  font-size: $font-sm;
+  background: white;
+  transition: border-color $transition-fast;
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px $hover-shadow-light;
+  }
+}
+
+// === Card/Section Styles ===
+@mixin card {
+  background: $section-bg;
+  border-radius: $radius-lg;
+  @include shadow-md;
+  padding: $spacing-lg;
+  border: 1px solid $primary-border;
+  transition: all $transition-fast;
+}
+
+// === Responsive Breakpoints (Desktop-First) ===
+// Tablet - Première adaptation (≤ 1024px)
+@mixin tablet {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+
+// Mobile Large - Deuxième adaptation (≤ 769px)
+@mixin mobile-large {
+  @media (max-width: 769px) {
+    @content;
+  }
+}
+
+// Mobile Small - Adaptation finale (≤ 480px)
+@mixin mobile-small {
+  @media (max-width: 480px) {
+    @content;
+  }
+}
+
+// Legacy mobile mixin (kept for backward compatibility, = mobile-large)
+@mixin mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1025px) {
+    @content;
+  }
+}
+
+// === Text Truncate ===
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// === Fixed Position Helper ===
+@mixin fixed-full {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

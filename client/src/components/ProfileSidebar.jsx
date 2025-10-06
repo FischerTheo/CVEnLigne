@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Composant barre latérale du profil (infos, langues, compétences, hobbies, contact)
-function ProfileSidebar({ userInfo, t, getAge, thStyle, tdStyle, skillLevels }) {
+function ProfileSidebar({ userInfo, t, getAge, skillLevels }) {
   if (!userInfo) return null
 
   // Transforme les liens sociaux en URLs absolues
@@ -30,27 +30,27 @@ function ProfileSidebar({ userInfo, t, getAge, thStyle, tdStyle, skillLevels }) 
   const githubUrl = toAbsoluteUrl(userInfo.github, 'github')
 
   return (
-    <div className="profile-sidebar">
+    <aside className="profile-sidebar" role="complementary" aria-label={t('resume.profile') || 'Profile information'}>
       {/* Photo de profil */}
       <img 
         src="/profile.png" 
-        alt="Profile"
+        alt={`${userInfo.fullName || 'Profile'} photo`}
         className="profile-img-sidebar"
       />
       {/* Nom */}
-      <div className="profile-name">
+      <h1 className="profile-name">
         {userInfo.fullName || ''}
-      </div>
+      </h1>
       {/* Métier */}
-      <div className="profile-job">
+      <p className="profile-job">
         {userInfo.jobTitle || ''}
-      </div>
+      </p>
       {/* Ville et âge */}
-      <div className="profile-info">
-        {userInfo.ville && <div style={{ marginBottom: 4 }}>{t('resume.city')}: {userInfo.ville}</div>}
+      <address className="profile-info">
+        {userInfo.ville && <div className="profile-info-item">{t('resume.city')}: {userInfo.ville}</div>}
         {userInfo.dateOfBirth && <div>{t('resume.age')}: {getAge(userInfo.dateOfBirth)}</div>}
-      </div>
-      <hr className="hr-style" />
+      </address>
+      <hr className="hr-style" aria-hidden="true" />
       {/* Langues */}
       {userInfo.languages?.length > 0 && (
         <>
@@ -77,22 +77,52 @@ function ProfileSidebar({ userInfo, t, getAge, thStyle, tdStyle, skillLevels }) 
           <table className="table-transparent">
             <thead>
               <tr>
-                {skillLevels.map(level => (
-                  <th key={level} className="th-style">{level}</th>
-                ))}
+                <th className="th-style">{skillLevels[0]}</th>
+                <th className="th-style">{skillLevels[1]}</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                {skillLevels.map(level => (
-                  <td key={level} className="td-style">
-                    <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                      {userInfo.skills.filter(sk => sk.level === level).map((sk, idx) => (
-                        <li key={idx}>{sk.skill}</li>
-                      ))}
-                    </ul>
-                  </td>
-                ))}
+                <td className="td-style">
+                  <ul className="profile-skills-list">
+                    {userInfo.skills.filter(sk => sk.level === skillLevels[0]).map((sk, idx) => (
+                      <li key={idx}>{sk.skill}</li>
+                    ))}
+                  </ul>
+                </td>
+                <td className="td-style">
+                  <ul className="profile-skills-list">
+                    {userInfo.skills.filter(sk => sk.level === skillLevels[1]).map((sk, idx) => (
+                      <li key={idx}>{sk.skill}</li>
+                    ))}
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table className="table-transparent">
+            <thead>
+              <tr>
+                <th className="th-style">{skillLevels[2]}</th>
+                <th className="th-style">{skillLevels[3]}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="td-style">
+                  <ul className="profile-skills-list">
+                    {userInfo.skills.filter(sk => sk.level === skillLevels[2]).map((sk, idx) => (
+                      <li key={idx}>{sk.skill}</li>
+                    ))}
+                  </ul>
+                </td>
+                <td className="td-style">
+                  <ul className="profile-skills-list">
+                    {userInfo.skills.filter(sk => sk.level === skillLevels[3]).map((sk, idx) => (
+                      <li key={idx}>{sk.skill}</li>
+                    ))}
+                  </ul>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -155,27 +185,39 @@ function ProfileSidebar({ userInfo, t, getAge, thStyle, tdStyle, skillLevels }) 
           </div>
           <div className="profile-social-links">
             {linkedinUrl && (
-              <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" title="LinkedIn">
+              <a 
+                href={linkedinUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label={`Visit ${userInfo.fullName || 'my'} LinkedIn profile`}
+              >
                 <img
                   src="/link.svg"
-                  alt="LinkedIn"
+                  alt=""
                   className="profile-social-icon"
+                  aria-hidden="true"
                 />
               </a>
             )}
             {githubUrl && (
-              <a href={githubUrl} target="_blank" rel="noopener noreferrer" title="GitHub">
+              <a 
+                href={githubUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label={`Visit ${userInfo.fullName || 'my'} GitHub profile`}
+              >
                 <img
                   src="/git.svg"
-                  alt="GitHub"
+                  alt=""
                   className="profile-social-icon"
+                  aria-hidden="true"
                 />
               </a>
             )}
           </div>
         </div>
       )}
-    </div>
+    </aside>
   )
 }
 

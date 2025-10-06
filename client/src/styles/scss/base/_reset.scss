@@ -1,0 +1,53 @@
+// =============================================================================
+// BASE STYLES - Global Document Styles
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: $primary-bg;
+  padding-top: 90px;
+  padding-left: 346px;
+}
+
+// === Tablet Body Adjustments ===
+@include tablet {
+  body {
+    padding-top: $navbar-height-tablet;
+  }
+}
+
+// === Mobile Large Body Adjustments ===
+@include mobile-large {
+  body {
+    padding-top: $navbar-height-mobile;
+    padding-left: 0;
+    overflow-x: hidden;
+  }
+}
+
+// === Utility Classes ===
+.flex-1 {
+  flex: 1;
+  min-width: 0;
+}
+
+.flex-center {
+  @include flex-center;
+}
+
+.flex-column {
+  @include flex-column;
+}
+
+.text-center {
+  text-align: center;
+}

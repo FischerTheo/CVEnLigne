@@ -4,7 +4,7 @@
     "title": "CV en ligne",
     "form": "Formulaire",
     "projects": "Mes projets",
-    "monParcour": "Mon parcour",
+    "monParcour": "Mon parcours",
     "save": "Sauvegarder",
     "logout": "Déconnexion",
     "login": "Connexion"
@@ -20,6 +20,6 @@
     "about": "À propos de moi",
     "objective": "Mon objectif",
     "projects": "Mes projets",
-    "monParcour": "Mon parcour"
+    "monParcour": "Mon parcours"
   }
 }

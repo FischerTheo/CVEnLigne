@@ -1,0 +1,201 @@
+// =============================================================================
+// BUTTONS - All Button Styles
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.btn {
+  @include button-base;
+  @include shadow-md;
+  color: white;
+  background: $button-bg;
+
+  &:hover {
+    background: $hover-bg-button;
+    transform: translateY($hover-transform-translate);
+    @include shadow-xl;
+  }
+
+  &-translate {
+    background: #10b981;
+    color: white;
+    border: 1px solid #059669;
+    padding: 4px 8px;
+    min-width: auto;
+    box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3);
+    font-weight: 600;
+    font-size: 12px;
+
+    &:hover {
+      background: #059669;
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
+    }
+  }
+
+  &-translate-sm {
+    background: #10b981;
+    color: white;
+    border: 1px solid #059669;
+    padding: 2px 6px !important;
+    min-width: auto;
+    box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3);
+    font-weight: 600;
+    font-size: 11px !important;
+    border-radius: 4px;
+
+    &:hover {
+      background: #059669;
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
+    }
+  }
+
+  &-translate-lg {
+    background: #10b981;
+    color: white;
+    border: 1px solid #059669;
+    padding: 8px 16px !important;
+    min-width: auto;
+    box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3);
+    font-weight: 600;
+    font-size: 14px !important;
+    border-radius: 8px;
+    margin-top: 8px;
+    width: 100%;
+    max-width: 150px;
+
+    &:hover {
+      background: #059669;
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
+    }
+  }
+
+  &-add {
+    color: white !important;
+  }
+
+  &-remove {
+    color: black !important;
+
+    &-pdf {
+      font-size: 12px;
+      padding: 4px 8px;
+    }
+  }
+
+  &-add-cert {
+    margin-top: $spacing-md;
+  }
+
+  &-nav {
+    background: $button-bg;
+    border: 1px solid $hover-bg-button;
+    border-radius: $radius-lg;
+    padding: $spacing-sm $spacing-xl;
+    cursor: pointer;
+    @include shadow-md;
+    transition: all $transition-fast;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: $font-sm;
+    display: inline-block;
+    min-width: auto;
+    max-width: none;
+
+    &:hover {
+      background: $hover-bg-button;
+      transform: translateY($hover-transform-translate);
+      box-shadow: 0 4px 12px $hover-shadow-light;
+    }
+  }
+}
+
+// === Tablet Adaptations ===
+@include tablet {
+  .btn {
+    padding: $spacing-xs-tablet $spacing-md-tablet;
+    font-size: $font-sm-tablet;
+
+    &-translate {
+      padding: 2px 4px;
+      font-size: $font-xs-tablet;
+    }
+
+    &-translate-sm {
+      padding: 1px 3px !important;
+      font-size: 10px !important;
+    }
+
+    &-translate-lg {
+      padding: 4px 8px !important;
+      font-size: $font-sm-tablet !important;
+      max-width: 100px;
+      margin-top: $spacing-sm-tablet;
+    }
+
+    &-nav {
+      padding: $spacing-xs-tablet $spacing-md-tablet;
+      font-size: $font-sm-tablet;
+    }
+
+    &-add, &-remove {
+      padding: $spacing-xs-tablet $spacing-sm-tablet;
+      font-size: $font-sm-tablet;
+    }
+
+    &-remove-pdf {
+      font-size: $font-xs-tablet;
+      padding: 2px 4px;
+    }
+  }
+}
+
+// === Mobile Large Adaptations ===
+@include mobile-large {
+  .btn {
+    padding: $spacing-md-mobile $spacing-lg-mobile;
+    font-size: $font-sm-mobile;
+    min-height: 44px;
+
+    &-translate {
+      padding: $spacing-sm-mobile $spacing-md-mobile;
+      font-size: $font-xs-mobile;
+      min-height: 36px;
+    }
+
+    &-translate-sm {
+      padding: $spacing-xs-mobile $spacing-sm-mobile !important;
+      font-size: $font-xs-mobile !important;
+      min-height: 32px;
+    }
+
+    &-translate-lg {
+      padding: $spacing-md-mobile $spacing-lg-mobile !important;
+      font-size: $font-sm-mobile !important;
+      max-width: 100%;
+      width: 100%;
+      margin-top: $spacing-sm-mobile;
+      min-height: 44px;
+    }
+
+    &-nav {
+      padding: $spacing-md-mobile $spacing-lg-mobile;
+      font-size: $font-sm-mobile;
+      min-height: 44px;
+    }
+
+    &-add, &-remove {
+      padding: $spacing-md-mobile;
+      font-size: $font-md-mobile;
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    &-remove-pdf {
+      font-size: $font-sm-mobile;
+      padding: $spacing-sm-mobile $spacing-md-mobile;
+      min-height: 36px;
+    }
+  }
+}

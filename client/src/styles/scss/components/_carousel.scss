@@ -1,0 +1,242 @@
+// =============================================================================
+// CAROUSEL - Carousel Component
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.carousel {
+  &-section {
+    flex: 1;
+    @include flex-center;
+    padding: $spacing-xl $spacing-huge;
+    margin-top: -$spacing-xxxl;
+  }
+
+  &-container {
+    width: 95%;
+    @include flex-column;
+    align-items: center;
+  }
+
+  &-title {
+    font-size: $font-xxl;
+    color: $text-color;
+    font-weight: 700;
+    margin-bottom: $spacing-huge;
+    text-align: center;
+  }
+
+  &-wrapper {
+    @include flex-row;
+    align-items: center;
+    width: 90%;
+    justify-content: center;
+  }
+
+  &-arrow {
+    background: $primary-bg;
+    border: 2px solid $primary-border;
+    border-radius: $radius-xl;
+    padding: $spacing-md $spacing-xxl;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: $font-xxl;
+    color: $text-color;
+    @include shadow-sm;
+    transition: background $transition-fast, color $transition-fast;
+
+    &:hover {
+      background: $hover-bg-primary;
+    }
+
+    &-left {
+      margin-right: $spacing-xxxl;
+    }
+
+    &-right {
+      margin-left: $spacing-xxxl;
+    }
+  }
+
+  &-items {
+    @include flex-row;
+    flex: 1;
+    gap: $spacing-huge;
+    justify-content: center;
+  }
+
+  &-item {
+    background: $section-bg;
+    border-radius: $radius-xxl;
+    @include shadow-md;
+    padding: $font-xxl;
+    min-width: 350px;
+    max-width: 400px;
+    flex: 1;
+    @include flex-column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid $primary-border;
+    transition: all $transition-fast;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY($hover-transform-translate);
+      @include shadow-xl;
+    }
+
+    &-title {
+      font-weight: 700;
+      font-size: $font-lg;
+      margin-bottom: $spacing-lg;
+      color: $text-color;
+      text-align: center;
+    }
+
+    &-content {
+      font-size: $font-sm;
+      color: $text-color;
+      text-align: center;
+      min-height: 48px;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      white-space: normal;
+    }
+  }
+}
+
+// === Tablet Adaptations ===
+@include tablet {
+  .carousel {
+    &-section {
+      padding: $spacing-lg-tablet $spacing-xl-tablet;
+      margin-top: -$spacing-xl-tablet;
+    }
+
+    &-title {
+      font-size: $font-xl-tablet;
+      margin-bottom: $spacing-lg-tablet;
+    }
+
+    &-wrapper {
+      width: 98%;
+    }
+
+    &-arrow {
+      padding: $spacing-xs-tablet $spacing-md-tablet;
+      font-size: $font-xl-tablet;
+      border-width: 1px;
+
+      &-left {
+        margin-right: $spacing-lg-tablet;
+      }
+
+      &-right {
+        margin-left: $spacing-lg-tablet;
+      }
+    }
+
+    &-items {
+      gap: $spacing-lg-tablet;
+    }
+
+    &-item {
+      min-width: 200px;
+      max-width: 240px;
+      padding: $spacing-lg-tablet;
+
+      &-title {
+        font-size: $font-md-tablet;
+        margin-bottom: $spacing-sm-tablet;
+      }
+
+      &-content {
+        font-size: $font-sm-tablet;
+        min-height: 30px;
+        line-height: 1.3;
+      }
+    }
+  }
+}
+
+// === Mobile Large Adaptations ===
+@include mobile-large {
+  .carousel {
+    &-section {
+      padding: $spacing-lg-mobile;
+      margin-top: 0;
+    }
+
+    &-container {
+      width: 100%;
+    }
+
+    &-title {
+      font-size: $font-xl-mobile;
+      margin-bottom: $spacing-xl-mobile;
+    }
+
+    &-wrapper {
+      width: 100%;
+      flex-direction: column;
+      gap: $spacing-md-mobile;
+    }
+
+    // Flèches en ligne pour navigation tactile
+    &-controls {
+      @include flex-row;
+      justify-content: center;
+      gap: $spacing-xl-mobile;
+      order: 2;
+      width: 100%;
+    }
+
+    &-arrow {
+      padding: $spacing-md-mobile $spacing-lg-mobile;
+      font-size: $font-xxl-mobile;
+      min-height: 48px;
+      min-width: 60px;
+      border-width: 2px;
+
+      &-left,
+      &-right {
+        margin: 0;
+      }
+
+      &-left {
+        order: 1;
+      }
+
+      &-right {
+        order: 2;
+      }
+    }
+
+    &-items {
+      flex-direction: column;
+      gap: $spacing-xl-mobile;
+      width: 100%;
+      order: 1;
+    }
+
+    &-item {
+      min-width: 100%;
+      max-width: 100%;
+      width: 100%;
+      padding: $spacing-xl-mobile;
+
+      &-title {
+        font-size: $font-lg-mobile;
+        margin-bottom: $spacing-md-mobile;
+      }
+
+      &-content {
+        font-size: $font-md-mobile;
+        min-height: 60px;
+        line-height: 1.6;
+      }
+    }
+  }
+}

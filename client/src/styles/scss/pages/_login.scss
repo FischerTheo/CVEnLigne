@@ -1,0 +1,227 @@
+// =============================================================================
+// LOGIN PAGE - Login & Sign In Styles
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.login {
+  &-container {
+    max-width: 400px;
+    margin-left: 25%;
+    margin-top: 20vh;
+    padding: $spacing-huge;
+    background: $section-bg;
+    border-radius: $radius-md;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  &-title {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+  }
+
+  &-input {
+    width: 100%;
+    margin-bottom: $spacing-xl;
+    padding: $spacing-md;
+    border-radius: $radius-sm;
+    @include border-standard;
+    font-size: $font-md;
+
+    &:focus {
+      outline: none;
+      border-color: $button-bg;
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+    }
+  }
+
+  &-button {
+    width: 100%;
+    padding: 10px;
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: $radius-sm;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: $font-md;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: #1565c0;
+    }
+  }
+
+  &-error {
+    color: #d32f2f;
+    margin-top: $spacing-lg;
+    text-align: center;
+    font-size: $font-sm;
+  }
+
+  &-separator {
+    margin-top: $spacing-xxxl;
+    padding-top: $spacing-xxxl;
+    border-top: 1px solid #e0e0e0;
+  }
+}
+
+.signin {
+  &-title {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+    font-size: $font-lg;
+  }
+
+  &-description {
+    margin-bottom: $spacing-xl;
+    color: #666;
+    text-align: center;
+    font-size: $font-sm;
+  }
+
+  &-input {
+    width: 100%;
+    margin-bottom: $spacing-xl;
+    padding: $spacing-md;
+    border-radius: $radius-sm;
+    border: 1px solid #ccc;
+    font-size: $font-md;
+
+    &:focus {
+      outline: none;
+      border-color: $button-bg;
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+    }
+  }
+
+  &-button {
+    width: 100%;
+    padding: 10px;
+    background: $secondary-accent;
+    color: #fff;
+    border: none;
+    border-radius: $radius-sm;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: $font-md;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: #475569;
+    }
+  }
+
+  &-error {
+    color: #d32f2f;
+    margin-top: $spacing-lg;
+    text-align: center;
+    font-size: $font-sm;
+  }
+}
+
+// === Tablet Adaptations ===
+@include tablet {
+  .login {
+    &-container {
+      max-width: 360px;
+      margin-left: 20%;
+      margin-top: 15vh;
+      padding: $spacing-xl;
+    }
+
+    &-title {
+      margin-bottom: $spacing-lg;
+      font-size: $font-lg;
+    }
+
+    &-input {
+      margin-bottom: $spacing-lg;
+      padding: $spacing-sm;
+      font-size: $font-sm;
+    }
+
+    &-button,
+    &-button-signup {
+      padding: $spacing-sm;
+      font-size: $font-sm;
+    }
+
+    &-error {
+      font-size: 13px;
+      margin-top: $spacing-md;
+    }
+  }
+}
+
+// === Mobile Large Adaptations ===
+@include mobile-large {
+  .login {
+    &-container {
+      max-width: 100%;
+      width: 100%;
+      margin: 0;
+      margin-top: 10vh;
+      padding: $spacing-xl-mobile;
+    }
+
+    &-title {
+      margin-bottom: $spacing-md-mobile;
+      font-size: $font-lg-mobile;
+    }
+
+    &-input {
+      margin-bottom: $spacing-md-mobile;
+      padding: $spacing-md-mobile;
+      font-size: 16px; // Minimum 16px to prevent iOS zoom
+      min-height: 44px; // Touch-friendly
+    }
+
+    &-button {
+      padding: $spacing-md-mobile;
+      font-size: $font-md-mobile;
+      min-height: 48px;
+    }
+
+    &-error {
+      font-size: $font-sm-mobile;
+      margin-top: $spacing-md-mobile;
+    }
+
+    &-separator {
+      margin-top: $spacing-xl-mobile;
+      padding-top: $spacing-xl-mobile;
+    }
+  }
+
+  .signin {
+    &-title {
+      margin-bottom: $spacing-md-mobile;
+      font-size: $font-lg-mobile;
+    }
+
+    &-description {
+      margin-bottom: $spacing-md-mobile;
+      font-size: $font-sm-mobile;
+    }
+
+    &-input {
+      margin-bottom: $spacing-md-mobile;
+      padding: $spacing-md-mobile;
+      font-size: 16px; // Minimum 16px to prevent iOS zoom
+      min-height: 44px;
+    }
+
+    &-button {
+      padding: $spacing-md-mobile;
+      font-size: $font-md-mobile;
+      min-height: 48px;
+    }
+
+    &-error {
+      font-size: $font-sm-mobile;
+      margin-top: $spacing-md-mobile;
+    }
+  }
+}

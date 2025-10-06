@@ -1,0 +1,435 @@
+// =============================================================================
+// FORMS - Form Components & Styles
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.form {
+  &-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: $spacing-xl;
+    background: $primary-bg;
+    border-radius: $radius-xl;
+    @include shadow-lg;
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="url"],
+    input:not([type]),
+    select,
+    textarea {
+      padding: $spacing-sm;
+      font-size: $font-sm;
+      @include border-standard;
+      border-radius: $radius-sm;
+    }
+
+    h3 {
+      font-size: $font-md;
+      margin: $spacing-md 0;
+    }
+
+    // Override note-textarea to allow full height
+    .note-textarea {
+      max-height: none !important;
+    }
+
+    &-wrapper {
+      align-items: flex-start;
+    }
+  }
+
+  &-title {
+    color: $text-color;
+    font-size: $font-lg;
+    font-weight: 700;
+    margin-bottom: $spacing-lg;
+    text-align: center;
+  }
+
+  &-section {
+    &-title {
+      color: $text-color;
+      font-size: $font-md;
+      font-weight: 600;
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  &-row {
+    @include flex-row;
+    gap: $spacing-md;
+    margin-bottom: $spacing-md;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  &-input {
+    flex: 1;
+    min-width: 200px;
+    @include input-base;
+  }
+
+  &-textarea {
+    width: 100%;
+    min-height: 30px;
+    @include input-base;
+    resize: none;
+    overflow: hidden;
+  }
+
+  &-item-container {
+    @include flex-column;
+    border: 1px solid #eee;
+    padding: $spacing-md;
+    margin-bottom: $spacing-md;
+    border-radius: $radius-sm;
+  }
+
+  &-message {
+    margin-top: 60px;
+
+    &-success {
+      color: green;
+    }
+
+    &-error {
+      color: red;
+    }
+  }
+
+  &-service {
+    &-item {
+      margin-bottom: $spacing-md;
+    }
+
+    &-input {
+      width: 100%;
+      margin-bottom: $spacing-sm;
+      padding: $spacing-sm;
+      font-size: $font-sm;
+    }
+
+    &-textarea {
+      width: 100%;
+      min-height: 30px;
+      padding: $spacing-sm;
+      font-size: $font-sm;
+    }
+  }
+}
+
+// === Certification Form Styles ===
+.form-certification-container {
+  margin-bottom: $spacing-lg;
+  padding: $spacing-md;
+  border: 1px solid #ccc;
+  border-radius: $radius-md;
+}
+
+.form-flex {
+  &-1 {
+    flex: 1;
+    min-width: 150px;
+  }
+
+  &-2 {
+    flex: 2;
+    min-width: 200px;
+  }
+}
+
+// === Dual Forms (FR/EN) ===
+.formulaire-container {
+  @include flex-row;
+  align-items: flex-start;
+  gap: $spacing-xxxl;
+  flex-wrap: wrap;
+}
+
+.form-block {
+  @include flex-column;
+  align-items: stretch;
+  flex: 1;
+  min-width: 0;
+
+  &-title {
+    max-width: 600px;
+    margin: 0 auto $spacing-md auto;
+    color: $text-color;
+    font-size: $font-xl;
+    font-weight: 700;
+    text-align: center;
+  }
+}
+
+// === Professional Summary Section ===
+.professional-summary {
+  &-row {
+    @include flex-row;
+    gap: $spacing-md;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+  }
+
+  &-col {
+    flex: 0 0 48%;
+    max-width: 48%;
+  }
+
+  &-textarea {
+    width: 100% !important;
+    max-height: none;
+  }
+}
+
+// === PDF Upload Sections ===
+.cert-pdf {
+  &-label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: $spacing-md;
+  }
+
+  &-upload-row {
+    @include flex-row;
+    gap: $spacing-md;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &-input {
+    display: block;
+    flex: 1;
+    min-width: 200px;
+  }
+
+  &-link {
+    margin-left: $spacing-md;
+    margin-right: $spacing-md;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.form-cert-desc {
+  min-height: 60px;
+  margin-bottom: $spacing-md;
+}
+
+// === CV Upload Section ===
+.flex-center-start {
+  @include flex-row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.cv-upload {
+  &-container {
+    margin-top: $spacing-xl;
+  }
+
+  &-label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: $spacing-md;
+  }
+}
+
+.cv-pdf {
+  &-file-input {
+    display: block;
+    margin-bottom: $spacing-md;
+  }
+
+  &-actions {
+    margin-top: $spacing-md;
+  }
+}
+
+// === Note Container ===
+.note {
+  &-container {
+    position: absolute;
+    left: 10px;
+    top: 90px;
+    width: $note-container-width;
+    z-index: 10;
+  }
+}
+
+// === Tablet Adaptations ===
+@include tablet {
+  .formulaire-container {
+    gap: $spacing-lg-tablet;
+    padding: $spacing-md-tablet;
+  }
+
+  .form {
+    &-block {
+      padding: 0;
+      min-width: 100%;
+
+      &-title {
+        font-size: $font-lg-tablet;
+        margin-bottom: $spacing-md-tablet;
+        padding: 0 $spacing-md-tablet;
+      }
+    }
+
+    &-container {
+      max-width: 100%;
+      padding: $spacing-md-tablet;
+      margin: 0;
+    }
+
+    &-title {
+      font-size: $font-md-tablet;
+      margin-bottom: $spacing-sm-tablet;
+    }
+
+    &-section {
+      &-title {
+        font-size: $font-sm-tablet;
+        margin-bottom: $spacing-xs-tablet;
+      }
+    }
+
+    &-row {
+      gap: $spacing-xs-tablet;
+      margin-bottom: $spacing-xs-tablet;
+    }
+
+    &-input {
+      min-width: 120px;
+      font-size: $font-sm-tablet;
+      padding: $spacing-xs-tablet;
+    }
+
+    &-textarea {
+      font-size: $font-sm-tablet;
+      padding: $spacing-xs-tablet;
+      min-height: 24px;
+    }
+
+    &-item-container {
+      padding: $spacing-xs-tablet;
+      margin-bottom: $spacing-xs-tablet;
+      border-width: 1px;
+    }
+
+    &-message {
+      margin-top: 40px;
+      font-size: $font-sm-tablet;
+    }
+  }
+
+  .note {
+    &-container {
+      width: $note-container-width-tablet;
+      top: 70px;
+      left: 6px;
+    }
+
+    &-textarea {
+      font-size: $font-sm-tablet;
+      padding: $spacing-sm-tablet;
+    }
+  }
+
+  .cv {
+    &-upload-container {
+      margin-top: $spacing-md-tablet;
+    }
+
+    &-upload-label {
+      font-size: $font-sm-tablet;
+      margin-bottom: $spacing-xs-tablet;
+    }
+
+    &-pdf-file-input {
+      font-size: $font-xs-tablet;
+    }
+
+    &-pdf-link {
+      font-size: $font-xs-tablet;
+      padding: $spacing-xs-tablet $spacing-sm-tablet;
+    }
+  }
+
+  .table-transparent {
+    th, td {
+      padding: $spacing-xs-tablet;
+      font-size: $font-xs-tablet;
+    }
+  }
+
+  .cert {
+    &-item {
+      padding: $spacing-sm-tablet;
+      margin-bottom: $spacing-sm-tablet;
+    }
+
+    &-title {
+      font-size: $font-sm-tablet;
+      margin-bottom: $spacing-xs-tablet;
+    }
+
+    &-meta {
+      font-size: $font-xs-tablet;
+      margin-bottom: $spacing-xs-tablet;
+    }
+
+    &-desc {
+      font-size: $font-sm-tablet;
+      margin-top: $spacing-xs-tablet;
+    }
+
+    &-pdf-link {
+      padding: $spacing-xs-tablet $spacing-sm-tablet;
+      font-size: $font-xs-tablet;
+      margin-top: $spacing-xs-tablet;
+    }
+
+    &-upload-section {
+      margin-top: $spacing-sm-tablet;
+    }
+
+    &-upload-label {
+      font-size: $font-xs-tablet;
+    }
+  }
+
+  .flex-center-start {
+    gap: $spacing-md-tablet;
+  }
+}
+
+// === Mobile Large Adaptations ===
+@include mobile-large {
+  .formulaire-container {
+    padding-top: 75px; // Espacement sous navbar
+  }
+
+  .flex-center-start {
+    flex-direction: column; // Empile
+    align-items: stretch;
+  }
+  .note-container {
+    position: static; // déjà retiré
+    order: 2; // après le formulaire
+    width: 100%;
+    max-width: 100%;
+    margin-top: $spacing-xl;
+  }
+  .flex-1 {
+    order: 1; // formulaire en premier
+  }
+}

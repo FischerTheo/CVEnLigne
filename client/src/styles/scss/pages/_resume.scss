@@ -1,0 +1,133 @@
+// =============================================================================
+// ONLINE RESUME PAGE - Resume Display Styles
+// =============================================================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.summary {
+  &-row {
+    height: 55%;
+    @include flex-row;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-huge;
+    gap: $spacing-giant;
+  }
+
+  &-box {
+    @include flex-row;
+    gap: 70px;
+    background: $primary-bg;
+    border-radius: $spacing-xxl;
+    @include shadow-md;
+    padding: $spacing-huge $font-xxl;
+    min-width: 400px;
+    max-width: 700px;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  &-section {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &-title {
+    margin-bottom: $spacing-lg;
+    font-size: $font-lg;
+    color: $text-color;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  &-text {
+    font-size: $font-sm;
+    color: $text-color;
+  }
+}
+
+.section-title {
+  font-size: $font-lg;
+  color: $text-color;
+  font-weight: 700;
+  margin-bottom: $spacing-lg;
+  text-align: center;
+  border-bottom: 2px solid $primary-border;
+  padding-bottom: $spacing-md;
+}
+
+// === Tablet Adaptations ===
+@include tablet {
+  .summary {
+    &-row {
+      padding: $spacing-lg-tablet $spacing-xl-tablet;
+      gap: $spacing-lg-tablet;
+      height: auto;
+    }
+
+    &-box {
+      gap: $spacing-xl-tablet;
+      padding: $spacing-lg-tablet $spacing-xl-tablet;
+      min-width: 200px;
+      max-width: 450px;
+    }
+
+    &-title {
+      font-size: $font-md-tablet;
+      margin-bottom: $spacing-sm-tablet;
+    }
+
+    &-text {
+      font-size: $font-sm-tablet;
+      line-height: 1.4;
+    }
+  }
+
+  .section-title {
+    font-size: $font-md-tablet;
+    margin-bottom: $spacing-sm-tablet;
+    padding-bottom: $spacing-xs-tablet;
+  }
+}
+
+// === Mobile Large Adaptations ===
+@include mobile-large {
+  .summary {
+    &-row {
+      flex-direction: column;
+      padding: $spacing-md-mobile;
+      gap: $spacing-md-mobile;
+      height: auto;
+    }
+
+    &-box {
+      flex-direction: column;
+      gap: $spacing-md-mobile;
+      padding: $spacing-md-mobile;
+      min-width: 100%;
+      max-width: 100%;
+      width: 100%;
+    }
+
+    &-section {
+      width: 100%;
+    }
+
+    &-title {
+      font-size: $font-md-mobile;
+      margin-bottom: $spacing-sm-mobile;
+    }
+
+    &-text {
+      font-size: $font-sm-mobile;
+      line-height: 1.5;
+    }
+  }
+
+  .section-title {
+    font-size: $font-md-mobile;
+    margin-bottom: $spacing-sm-mobile;
+    padding-bottom: $spacing-xs-mobile;
+  }
+}

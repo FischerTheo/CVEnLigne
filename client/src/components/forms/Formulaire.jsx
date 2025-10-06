@@ -8,8 +8,7 @@ import AutoResizeTextarea from '../common/AutoResizeTextarea'
 import { useTranslation } from 'react-i18next'
 import { apiFetch, API } from '../../lib/api'
 
-// Formulaire principal : gère toutes les sections du CV, la traduction, l'upload du PDF et la note utilisateur
-// Formulaire principal du CV : gère la logique, la traduction, l'upload du PDF et la note utilisateur
+// Formulaire principal du CV : gère les sections, la traduction FR/EN, l'upload PDF et la note utilisateur
 const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFormChange, showTranslateButtons = false, showAddButtons = true, forcedLang }, ref) {
   // Bouton pour traduire un champ (FR <-> EN)
   const TranslateBtn = ({ show, onClick, disabled }) => (show ? (
@@ -278,11 +277,13 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
     if (field === 'certifications') empty = { certName: '', certOrg: '', certDate: '', certDesc: '', pdfUrl: '' }
     if (field === 'softSkills' || field === 'references' || field === 'hobbies') empty = ''
     if (field === 'services' || field === 'projects') empty = { title: '', description: '' } // NEW
+    lastChangedUpdateRef.current = { type: 'field', field }
     setFormState(f => ({ ...f, [field]: [...f[field], empty] }))
   }
 
   // Supprime un élément d'un tableau du formulaire
   const removeArrayItem = (field, idx) => {
+    lastChangedUpdateRef.current = { type: 'field', field }
     setFormState(f => ({ ...f, [field]: f[field].filter((_, i) => i !== idx) }))
   }
 
@@ -413,53 +414,48 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
         )
       }), { silent: true })
     }
-    ,
-    // Set a single field coming from the partner form (already translated)
-    setExternalField: (field, value) => {
-      if (!field) return
-      setFormState(f => ({ ...f, [field]: value }), { silent: true })
-    }
   }))
 
   return (
-    <div className="flex-center" style={{ alignItems: 'flex-start' }}>
+    <div className="flex-center-start">
       {/* Note section */}
       {showNote && (
         <div className="note-container">
           <AutoResizeTextarea
+            id="note"
+            name="note"
             className="note-textarea"
             placeholder="Ajouter une note ou une description..."
             value={note}
             onChange={handleNoteChange}
             onBlur={saveNote}
+            autoComplete="off"
             noLimit
           />
           {/* Upload CV PDF section - dans la section note */}
-          <div style={{ marginTop: 16 }}>
-            <label htmlFor="cv-pdf-upload" style={{ fontWeight: 600, display: 'block', marginBottom: 8 }}>Uploader le CV papier (PDF)</label>
+          <div className="cv-upload-container">
+            <label htmlFor="cv-pdf-upload" className="cv-upload-label">Uploader le CV papier (PDF)</label>
             <input
               type="file"
               id="cv-pdf-upload"
               accept="application/pdf"
               onChange={handleCvUpload}
-              style={{ display: 'block', marginBottom: 8 }}
+              className="cv-pdf-file-input"
             />
             {cvPdfUrl && (
-              <div style={{ marginTop: 8 }}>
+              <div className="cv-pdf-actions">
                 <a
                   href={`${API}${cvPdfUrl}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cert-pdf-link"
-                  style={{ marginRight: 8 }}
                 >
                   Voir le PDF
                 </a>
                 <button
                   type="button"
                   onClick={handleCvDelete}
-                  className="btn btn-remove"
-                  style={{ fontSize: '12px', padding: '4px 8px' }}
+                  className="btn btn-remove btn-remove-pdf"
                 >
                   Supprimer
                 </button>
@@ -493,11 +489,14 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
           <section className="form-section">
             <h3 className="form-section-title">Mes projets</h3>
             {form.projects.map((project, idx) => (
-              <div key={idx} className="form-row">
+              <div key={idx} className="form-item-container">
                 <input
+                  id={`project-title-${idx}`}
+                  name={`projects[${idx}].title`}
                   placeholder="Titre du projet"
                   value={project.title}
                   onChange={e => handleArrayChange('projects', idx, 'title', e.target.value)}
+                  autoComplete="off"
                   className="form-input"
                 />
                 <TranslateBtn
@@ -506,9 +505,12 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
                   disabled={projectLoadingKey === projectKey(idx, 'title')}
                 />
                 <AutoResizeTextarea
+                  id={`project-description-${idx}`}
+                  name={`projects[${idx}].description`}
                   placeholder="Description du projet"
                   value={project.description}
                   onChange={e => handleArrayChange('projects', idx, 'description', e.target.value)}
+                  autoComplete="off"
                   className="form-textarea"
                 />
                 <TranslateBtn
@@ -517,12 +519,12 @@ const Formulaire = forwardRef(function Formulaire({ token, showNote = true, onFo
                   disabled={projectLoadingKey === projectKey(idx, 'description')}
                 />
                 {canRemove && form.projects.length > 1 && (
-                  <button type="button" className="btn" onClick={() => removeArrayItem('projects', idx)}>-</button>
+                  <button type="button" className="btn btn-remove" onClick={() => removeArrayItem('projects', idx)}>-</button>
                 )}
               </div>
             ))}
             {showAddButtons && (
-              <button type="button" className="btn" onClick={() => addArrayItem('projects')}>Ajouter un projet</button>
+              <button type="button" className="btn btn-add" onClick={() => addArrayItem('projects')}>Ajouter un projet</button>
             )}
           </section>
           {/* End Projects */}
