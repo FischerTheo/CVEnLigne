@@ -18,10 +18,10 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.3.5",
     "multer": "^2.0.1",
+    "pino": "^9.3.2",
     "xss-clean": "^0.1.4"
   },
   "devDependencies": {
-    "nodemon": "^3.1.7",
-    "pino": "^9.3.2"
+    "nodemon": "^3.1.7"
   }
 }
