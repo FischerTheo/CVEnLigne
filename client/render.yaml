@@ -1,0 +1,10 @@
+# Build settings for Render
+buildCommand = "npm install && npm run build"
+publishDir = "dist"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
