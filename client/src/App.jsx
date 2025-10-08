@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import Login from './pages/Login.jsx'
 import FormulairePage from './pages/FormulairePage.jsx'
 import OnlineResume from './pages/OnlineResume.jsx'
@@ -11,10 +12,16 @@ import MonParcour from './pages/MonParcour.jsx'
 import Navbar from './components/Navbar.jsx'
 
 function App() {
+  const { i18n } = useTranslation()
   const [token, setToken] = useState(localStorage.getItem('token') || '')
   const [isAdmin, setIsAdmin] = useState(localStorage.getItem('isAdmin') === 'true')
   const formulaireRef1 = useRef()
   const formulaireRef2 = useRef()
+
+  // Met à jour l'attribut lang du document HTML selon la langue active (fr ou en)
+  React.useEffect(() => {
+    document.documentElement.lang = i18n.language
+  }, [i18n.language])
 
   // Vérifie l'expiration du token à chaque rendu
   React.useEffect(() => {

@@ -15,23 +15,30 @@
   border-radius: $radius-sm;
 }
 
-// Skip link
+// Skip link - Navigation rapide
 .skip-link {
-  position: absolute;
-  top: -40px;
+  position: fixed;
+  top: -100px;
   left: 0;
   background: $button-bg;
   color: white;
-  padding: $spacing-md $spacing-lg;
+  padding: $spacing-xl $spacing-xxl;
   text-decoration: none;
   border-radius: $radius-md;
-  z-index: 100;
+  z-index: 9999;
   font-weight: 600;
+  font-size: $font-md;
+  transition: top 0.2s ease-in-out;
 
   &:focus {
-    top: $spacing-md;
-    left: $spacing-md;
+    top: $spacing-xl;
+    left: $spacing-xl;
     outline: 3px solid white;
+    outline-offset: 2px;
+  }
+
+  &:hover {
+    background: $hover-bg-button;
   }
 }
 

@@ -24,8 +24,13 @@ function MonParcour() {
       })
   }, [i18n.language]);
 
+  // Met à jour le titre de la page 
+  useEffect(() => {
+    document.title = i18n.language === 'fr' ? 'Mon Parcours - CV en ligne' : 'My Career - Online Resume'
+  }, [i18n.language]);
+
   return (
-    <div className="parcour-container">
+    <div className="parcour-container" id="main-content">
       <h1 className="parcour-title">{t('resume.monParcour')}</h1>
       <div className="parcour-content">
         <div className="parcour-column">

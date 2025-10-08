@@ -1,6 +1,6 @@
 // Page de connexion utilisateur
 // Gère l'authentification et la récupération du token
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { apiFetch } from '../lib/api'
 
 // Composant Login : formulaire de connexion
@@ -13,6 +13,11 @@ function Login({ onLogin }) {
   const [signInEmail, setSignInEmail] = useState('')
   const [signInPassword, setSignInPassword] = useState('')
   const [signInError, setSignInError] = useState('')
+
+  // Met à jour le titre de la page 
+  useEffect(() => {
+    document.title = 'Login - Online Resume'
+  }, [])
 
   // Soumet le formulaire et gère la connexion
   const handleSubmit = async (e) => {
@@ -73,10 +78,11 @@ function Login({ onLogin }) {
   }
 
   return (
-    <div className="login-container">
+    <div className="login-container" id="main-content">
       <h2 className="login-title">Login</h2>
       <form onSubmit={handleSubmit}>
         {/* Champ email */}
+        <label htmlFor="login-email" className="sr-only">Email</label>
         <input
           type="email"
           id="login-email"
@@ -89,6 +95,7 @@ function Login({ onLogin }) {
           className="login-input"
         />
         {/* Champ mot de passe */}
+        <label htmlFor="login-password" className="sr-only">Password</label>
         <input
           type="password"
           id="login-password"
@@ -109,12 +116,13 @@ function Login({ onLogin }) {
         
       </form>
       
-      {/* Zone Sign In */}
+      {/* Zone SignIn */}
       <div className="login-separator">
         <h3 className="signin-title">Sign In</h3>
         <p className="signin-description">Créer un nouveau compte</p>
         
         {/* Champ email inscription */}
+        <label htmlFor="signin-email" className="sr-only">Email for new account</label>
         <input
           type="email"
           id="signin-email"
@@ -127,6 +135,7 @@ function Login({ onLogin }) {
         />
         
         {/* Champ mot de passe inscription */}
+        <label htmlFor="signin-password" className="sr-only">Password for new account</label>
         <input
           type="password"
           id="signin-password"

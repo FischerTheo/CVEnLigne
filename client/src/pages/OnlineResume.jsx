@@ -46,7 +46,15 @@ function OnlineResume() {
     })()
   }, [i18n.language])
 
-  // Fetch projects pour admin (public) quand la langue change
+  // Met à jour le titre de la page dynamiquement
+  useEffect(() => {
+    const pageTitle = userInfo?.fullName 
+      ? `${userInfo.fullName} - ${i18n.language === 'fr' ? 'CV en ligne' : 'Online Resume'}`
+      : i18n.language === 'fr' ? 'CV en ligne' : 'Online Resume'
+    document.title = pageTitle
+  }, [userInfo, i18n.language])
+
+  // Fetch projects pour admin quand langue change
   useEffect(() => {
     (async () => {
       try {

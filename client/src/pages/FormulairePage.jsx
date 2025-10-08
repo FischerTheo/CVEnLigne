@@ -1,15 +1,20 @@
 // Page formulaire admin avec formulaires FR/EN synchronisés
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import Formulaire from '../components/forms/Formulaire.jsx'
 
 function FormulairePage({ token, formulaireRefs }) {
   const formulaireRef1 = formulaireRefs?.[0] || useRef()
   const formulaireRef2 = formulaireRefs?.[1] || useRef()
 
+  // Met à jour le titre de la page 
+  useEffect(() => {
+    document.title = 'Formulaire - Admin'
+  }, [])
+
   return (
-    <div className="formulaire-container">
+    <div className="formulaire-container" id="main-content">
       {/* Formulaire FR (gauche) */}
-      <div className="form-block">
+      <div className="form-block" lang="fr">
         <h2 className="form-block-title">formulaire fr</h2>
         <Formulaire
           ref={formulaireRef1}
@@ -28,7 +33,6 @@ function FormulairePage({ token, formulaireRefs }) {
                 target.setExternalArrayField(newForm.field, newForm.idx, newForm.key, newForm.value)
                 return
               }
-              // Mise à jour d'un champ simple
               if (target.setExternalField) {
                 target.setExternalField(newForm.field, newForm.value)
                 return
@@ -38,7 +42,7 @@ function FormulairePage({ token, formulaireRefs }) {
         />
       </div>
       {/* Formulaire EN (droite) */}
-      <div className="form-block">
+      <div className="form-block" lang="en">
         <h2 className="form-block-title">en form</h2>
         <Formulaire 
           ref={formulaireRef2} 

@@ -265,7 +265,7 @@ function ProfileSidebar({ userInfo, t, getAge, skillLevels }) {
               </div>
             )}
           </div>
-          <div className="profile-social-links">
+          <div className="profile-social-links" lang="en">
             {linkedinUrl && (
               <a 
                 href={linkedinUrl} 
@@ -275,7 +275,7 @@ function ProfileSidebar({ userInfo, t, getAge, skillLevels }) {
               >
                 <img
                   src="/link.svg"
-                  alt="linkedin"
+                  alt="Lien vers le profil LinkedIn"
                   className="profile-social-icon"
                   aria-hidden="true"
                 />
@@ -290,7 +290,7 @@ function ProfileSidebar({ userInfo, t, getAge, skillLevels }) {
               >
                 <img
                   src="/git.svg"
-                  alt="github"
+                  alt="Lien vers le profil GitHub"
                   className="profile-social-icon"
                   aria-hidden="true"
                 />
