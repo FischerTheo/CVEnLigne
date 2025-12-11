@@ -1,0 +1,27 @@
+// GESTION D'ERREUR - Composant d'affichage des erreurs
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.error-boundary {
+  &-container {
+    padding: $spacing-xxxl;
+    background: $section-bg;
+    border-radius: $radius-md;
+    margin: $spacing-xxxl;
+    @include shadow-md;
+  }
+
+  &-message {
+    white-space: pre-wrap;
+    background: #fee;
+    border: 1px solid #f88;
+    border-radius: $radius-sm;
+    padding: $spacing-lg;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #c33;
+    overflow-x: auto;
+    margin-top: $spacing-lg;
+  }
+}

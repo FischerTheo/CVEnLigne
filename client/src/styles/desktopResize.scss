@@ -1,0 +1,33 @@
+// DESKTOP RESIZE - Gestion dynamique de la largeur du sidebar (PC UNIQUEMENT)
+// Appliqué UNIQUEMENT sur les écrans > 1024px (desktop)
+
+@use './scss/abstracts/variables' as *;
+
+@media (min-width: 1025px) {
+  // Utilise une variable CSS pour la largeur dynamique du sidebar
+  :root {
+    --sidebar-width: 425px;
+  }
+
+  body {
+    padding-left: 0;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .profile-sidebar {
+    width: var(--sidebar-width);
+  }
+}
+
+@media (max-width: 1600px) and (min-width: 1025px) {
+  :root {
+    --sidebar-width: 280px;
+  }
+  
+  .profile-sidebar {
+    width: 280px;
+  }
+}

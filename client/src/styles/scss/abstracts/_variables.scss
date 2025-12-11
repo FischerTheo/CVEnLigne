@@ -1,0 +1,105 @@
+// VARIABLES SCSS - Tokens de design centralisés
+
+// Palette de couleurs
+$primary-bg: #f8fafc;           // Couleur de fond principale - gris bleu clair
+$primary-shadow: #978e8c;       // Couleur d'accent/ombre principale
+$primary-border: #e2e8f0;       // Couleur de bordure - gris clair
+$text-color: #1e293b;           // Couleur de texte unifiée - ardoise foncée
+$section-bg: #ffffff;           // Fond de section - blanc pur
+$button-bg: #2563eb;            // Fond de bouton - bleu
+$secondary-accent: #475569;     // Couleur d'accent secondaire - gris ardoise plus foncé (meilleur contraste WCAG AAA)
+
+// États hover
+$hover-bg-primary: #3e5881;     // Fond hover principal
+$hover-bg-button: #1d4ed8;      // Fond hover de bouton
+$hover-bg-danger: #b71c1c;      // Hover bouton danger
+$hover-shadow-light: rgba(59, 130, 246, 0.15);  // Ombre bleue claire pour hover
+$hover-transform-scale: 1.1;    // Échelle transform pour hover
+$hover-transform-translate: -2px; // Translation transform pour hover
+
+// Typographie
+$font-xs: 13px;
+$font-sm: 15px;
+$font-md: 16px;
+$font-lg: 18px;
+$font-xl: 24px;
+$font-xxl: 28px;
+$font-xxxl: 32px;
+
+// Espacement
+$spacing-xs: 2px;
+$spacing-sm: 4px;
+$spacing-md: 8px;
+$spacing-lg: 12px;
+$spacing-xl: 16px;
+$spacing-xxl: 18px;
+$spacing-xxxl: 24px;
+$spacing-huge: 32px;
+$spacing-giant: 48px;
+
+// Arrondis de bordure
+$radius-sm: 6px;
+$radius-md: 8px;
+$radius-lg: 10px;
+$radius-xl: 12px;
+$radius-xxl: 16px;
+$radius-xxxl: 18px;
+$radius-huge: 24px;
+
+// Transitions
+$transition-fast: 0.2s;
+
+// Breakpoints responsive
+$breakpoint-desktop: 1600px;
+$breakpoint-tablet: 1024px;
+$breakpoint-mobile-large: 768px;
+$breakpoint-mobile-small: 480px;
+
+// Layout
+$navbar-height: 64px;
+$navbar-height-tablet: 56px;
+$sidebar-width: 425px;
+$sidebar-width-tablet: 250px;
+$note-container-width: 320px;
+$note-container-width-tablet: 240px;
+
+// Tailles de police tablette (base réduite à 13px)
+$font-xs-tablet: 11px;
+$font-sm-tablet: 12px;
+$font-md-tablet: 13px;
+$font-lg-tablet: 14px;
+$font-xl-tablet: 16px;
+$font-xxl-tablet: 18px;
+
+// Espacement tablette (réduit de 50%)
+$spacing-xs-tablet: 1px;
+$spacing-sm-tablet: 2px;
+$spacing-md-tablet: 4px;
+$spacing-lg-tablet: 6px;
+$spacing-xl-tablet: 8px;
+$spacing-xxl-tablet: 10px;
+$spacing-xxxl-tablet: 12px;
+$spacing-huge-tablet: 16px;
+
+// Tailles de police mobile-large (base 14px, lisible)
+$font-xs-mobile: 12px;
+$font-sm-mobile: 13px;
+$font-md-mobile: 14px;
+$font-lg-mobile: 16px;
+$font-xl-mobile: 18px;
+$font-xxl-mobile: 20px;
+
+// Espacement mobile-large (compact mais touch-friendly)
+$spacing-xs-mobile: 2px;
+$spacing-sm-mobile: 4px;
+$spacing-md-mobile: 8px;
+$spacing-lg-mobile: 12px;
+$spacing-xl-mobile: 16px;
+$spacing-xxl-mobile: 20px;
+$spacing-xxxl-mobile: 24px;
+
+// Layout mobile-large
+$navbar-height-mobile: 52px;
+$sidebar-width-mobile: 100%;
+$container-width-mobile: 90%; // Largeur adaptative pour form-container et note-container (90% de l'écran)
+$container-max-width-mobile: 600px; // Largeur maximale pour grands écrans mobile

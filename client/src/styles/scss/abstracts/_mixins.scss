@@ -1,0 +1,160 @@
+// MIXINS SCSS - Patterns de style réutilisables
+
+@use 'variables' as *;
+
+// Mixins Flexbox
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+// Effets hover
+@mixin hover-lift {
+  transition: all $transition-fast;
+  
+  &:hover {
+    transform: translateY($hover-transform-translate);
+    box-shadow: 0 8px 24px $hover-shadow-light;
+  }
+}
+
+@mixin hover-scale {
+  transition: transform $transition-fast;
+  
+  &:hover {
+    transform: scale($hover-transform-scale);
+  }
+}
+
+// Mixins ombres
+@mixin shadow-sm {
+  box-shadow: 0 1px 4px $primary-shadow;
+}
+
+@mixin shadow-md {
+  box-shadow: 0 2px 8px $primary-shadow;
+}
+
+@mixin shadow-lg {
+  box-shadow: 0 4px 16px $primary-shadow;
+}
+
+@mixin shadow-xl {
+  box-shadow: 0 8px 24px $hover-shadow-light;
+}
+
+// Mixins bordures
+@mixin border-standard {
+  border: 1px solid $primary-border;
+}
+
+@mixin border-thick {
+  border: 2px solid $primary-shadow;
+}
+
+// Base bouton
+@mixin button-base {
+  padding: $spacing-sm $spacing-xl;
+  border-radius: $radius-lg;
+  border: 1px solid $primary-border;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: $font-sm;
+  letter-spacing: 0.5px;
+  transition: all $transition-fast;
+  min-width: auto;
+  max-width: none;
+  overflow: visible;
+  text-overflow: initial;
+  white-space: nowrap;
+}
+
+// Base input/textarea
+@mixin input-base {
+  padding: $spacing-sm;
+  border: 1px solid $primary-border;
+  border-radius: $radius-md;
+  font-size: $font-sm;
+  background: white;
+  transition: border-color $transition-fast;
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px $hover-shadow-light;
+  }
+}
+
+// Mixin pour les inputs de formulaire (standardisation)
+@mixin form-input-styles {
+  padding: $spacing-sm;
+  font-size: $font-sm;
+  @include border-standard;
+  border-radius: $radius-sm;
+  transition: border-color $transition-fast;
+
+  &:focus {
+    outline: none;
+    border-color: $secondary-accent;
+    box-shadow: 0 0 0 2px $hover-shadow-light;
+  }
+}
+
+// Styles carte/section
+@mixin card {
+  background: $section-bg;
+  border-radius: $radius-lg;
+  @include shadow-md;
+  padding: $spacing-lg;
+  border: 1px solid $primary-border;
+  transition: all $transition-fast;
+}
+
+// RESPONSIVE SUPPRIMÉ - DESKTOP ONLY
+// ====================================
+// Tous les mixins responsive (tablet, mobile, mobile-large, mobile-small) 
+// ont été supprimés du projet. Le site est maintenant 100% Desktop uniquement.
+
+// truncate
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Helper position fixe
+@mixin fixed-full {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+// Mixin pour les boutons de traduction (évite la duplication)
+@mixin translate-button($padding, $font-size, $border-radius: 4px) {
+  background: #10b981;
+  color: white;
+  border: 1px solid #059669;
+  padding: $padding;
+  min-width: auto;
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3);
+  font-weight: 600;
+  font-size: $font-size;
+  border-radius: $border-radius;
+
+  &:hover {
+    background: #059669;
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
+  }
+}

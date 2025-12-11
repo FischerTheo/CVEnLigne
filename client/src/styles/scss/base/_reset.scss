@@ -1,0 +1,51 @@
+// STYLES DE BASE - Styles globaux du document
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: $primary-bg;
+  padding-top: 90px;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  box-sizing: border-box;
+  
+  // Padding pour sidebar UNIQUEMENT en desktop (> 1024px)
+  @media (min-width: 1025px) {
+    padding-left: 346px;
+  }
+}
+
+// Classes utilitaires
+.flex-1 {
+  flex: 1;
+  min-width: 0;
+}
+
+.flex-center {
+  @include flex-center;
+}
+
+.flex-column {
+  @include flex-column;
+}
+
+.text-center {
+  text-align: center;
+}

@@ -1,0 +1,143 @@
+// PAGE LOGIN - Styles de connexion et inscription (DESKTOP ONLY)
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.login {
+  &-container {
+    max-width: 400px;
+    width: 100%;
+    margin-left: 25%;
+    margin-top: 20vh;
+    padding: $spacing-huge;
+    background: $section-bg;
+    border-radius: $radius-md;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    
+    // Responsive tablette
+    @media (max-width: $breakpoint-tablet) {
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 10vh;
+      padding: $spacing-xxl;
+      max-width: 90%;
+    }
+    
+    // Responsive mobile
+    @media (max-width: $breakpoint-mobile-large) {
+      margin-top: 5vh;
+      padding: $spacing-xl;
+      max-width: 95%;
+    }
+    
+    @media (max-width: $breakpoint-mobile-small) {
+      padding: $spacing-lg;
+      margin-top: 3vh;
+    }
+  }
+
+  &-title {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+    font-size: $font-lg;
+  }
+
+  &-input {
+    width: 100%;
+    margin-bottom: $spacing-xl;
+    padding: $spacing-md;
+    font-size: $font-md;
+    border-radius: $radius-sm;
+    @include border-standard;
+
+    &:focus {
+      outline: none;
+      border-color: $button-bg;
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+    }
+  }
+
+  &-button {
+    width: 100%;
+    padding: 10px;
+    font-size: $font-md;
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: $radius-sm;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: #1565c0;
+    }
+  }
+
+  &-error {
+    color: #d32f2f;
+    margin-top: $spacing-lg;
+    font-size: $font-sm;
+    text-align: center;
+  }
+
+  &-separator {
+    margin-top: $spacing-xxxl;
+    padding-top: $spacing-xxxl;
+    border-top: 1px solid #e0e0e0;
+  }
+}
+
+.signin {
+  &-title {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+    font-size: $font-lg;
+  }
+
+  &-description {
+    margin-bottom: $spacing-xl;
+    font-size: $font-sm;
+    color: #666;
+    text-align: center;
+  }
+
+  &-input {
+    width: 100%;
+    margin-bottom: $spacing-xl;
+    padding: $spacing-md;
+    font-size: $font-md;
+    border-radius: $radius-sm;
+    border: 1px solid #ccc;
+
+    &:focus {
+      outline: none;
+      border-color: $button-bg;
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+    }
+  }
+
+  &-button {
+    width: 100%;
+    padding: 10px;
+    font-size: $font-md;
+    background: $secondary-accent;
+    color: #fff;
+    border: none;
+    border-radius: $radius-sm;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: #475569;
+    }
+  }
+
+  &-error {
+    color: #d32f2f;
+    margin-top: $spacing-lg;
+    font-size: $font-sm;
+    text-align: center;
+  }
+}

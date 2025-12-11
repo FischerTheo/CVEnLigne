@@ -1,0 +1,25 @@
+{
+
+  "navbar": {
+    "title": "CV en ligne",
+    "form": "Formulaire",
+    "projects": "Mes projets",
+    "monParcour": "Mon parcours",
+    "save": "Sauvegarder",
+    "logout": "Déconnexion",
+    "login": "Connexion"
+  },
+  "resume": {
+    "city": "Ville",
+    "age": "Âge",
+    "languages": "Langues",
+    "skills": "Compétences",
+    "softSkills": "Compétences personnelles",
+    "hobbies": "Centres d'intérêt",
+    "contact": "Contact",
+    "about": "À propos de moi",
+    "objective": "Mon objectif",
+    "projects": "Mes projets",
+    "monParcour": "Mon parcours"
+  }
+}

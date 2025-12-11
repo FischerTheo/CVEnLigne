@@ -1,0 +1,107 @@
+// ACCESSIBILITÉ - Styles de focus et navigation clavier
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// Styles focus visible
+*:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+*:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+  border-radius: $radius-sm;
+}
+
+// Skip link - Navigation rapide
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 0;
+  background: $button-bg;
+  color: white;
+  padding: $spacing-xl $spacing-xxl;
+  text-decoration: none;
+  border-radius: $radius-md;
+  z-index: 9999;
+  font-weight: 600;
+  font-size: $font-md;
+  transition: top 0.2s ease-in-out;
+
+  &:focus {
+    top: $spacing-xl;
+    left: $spacing-xl;
+    outline: 3px solid white;
+    outline-offset: 2px;
+  }
+
+  &:hover {
+    background: $hover-bg-button;
+  }
+}
+
+// Meilleur focus pour les éléments interactifs
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.2); // Halo supplémentaire pour meilleure visibilité
+}
+
+// Exception pour les boutons de la navbar - pas d'ombre au focus
+.navbar-btn:focus-visible,
+.navbar-login-btn:focus-visible,
+.navbar-cv-btn:focus-visible {
+  box-shadow: none;
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}
+
+// Mouvement réduit pour l'accessibilité
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// Support mode contraste élevé
+@media (prefers-contrast: high) {
+  * {
+    border-color: currentColor;
+  }
+
+  button,
+  a {
+    outline: 2px solid currentColor;
+  }
+}
+
+// Classe lecteur d'écran uniquement
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// Piège de focus pour les modales
+.focus-trap {
+  &:focus {
+    outline: none;
+  }
+}

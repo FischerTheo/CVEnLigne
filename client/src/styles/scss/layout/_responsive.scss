@@ -1,0 +1,853 @@
+// RESPONSIVE - Mobile First
+// RÈGLE: Sur téléphone, TOUT en colonne, 100% largeur, SANS débordement
+// TECHNIQUE: Spécificité augmentée sans !important (sélecteurs composés)
+
+@use '../abstracts/variables' as *;
+@use "sass:math";
+
+// ============================================
+// TABLETTE (768px - 1024px) - Layout intermédiaire
+// ============================================
+@media (max-width: $breakpoint-tablet) and (min-width: calc($breakpoint-mobile-large + 1px)) {
+  
+  body {
+    padding-left: 0;
+    padding-top: calc($navbar-height-tablet + $spacing-lg);
+  }
+
+  // --- LAYOUT PRINCIPAL ---
+  div.main-flex {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+  }
+
+  div.main-content {
+    width: 100%;
+    max-width: 100vw;
+    padding: $spacing-lg;
+    margin-left: 0;
+    box-sizing: border-box;
+  }
+
+  // --- SIDEBAR EN COLONNE (au-dessus) ---
+  aside.profile-sidebar {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: $spacing-lg;
+    padding: $spacing-lg;
+    border-radius: $radius-lg;
+  }
+
+  // --- SUMMARY (About + Objective côte à côte, photo en dessous) ---
+  div.summary-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    padding: $spacing-lg 0;
+    gap: $spacing-lg;
+    box-sizing: border-box;
+  }
+
+  div.summary-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    gap: $spacing-lg;
+    padding: $spacing-lg;
+    box-sizing: border-box;
+  }
+
+  section.summary-section {
+    flex: 1;
+    width: auto;
+    max-width: 50%;
+  }
+
+  img.profile-img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  // --- CAROUSEL (2 projets visibles) ---
+  section.carousel-section {
+    width: 100%;
+    padding: $spacing-lg 0;
+  }
+
+  figure.carousel-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+    gap: $spacing-md;
+    min-height: 0;
+  }
+
+  section.carousel-items {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+    gap: $spacing-md;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  article.carousel-item {
+    min-width: 250px;
+    max-width: 350px;
+    flex: 1;
+    padding: $spacing-lg;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+  }
+
+  button.carousel-arrow {
+    min-width: 50px;
+    max-width: 80px;
+    padding: 0 $spacing-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    flex-shrink: 0;
+    height: auto;
+  }
+
+  // --- PARCOURS (2 colonnes) ---
+  .parcour-container {
+    padding: $spacing-lg;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .parcour-title {
+    font-size: $font-xxl;
+    margin-bottom: $spacing-lg;
+  }
+
+  .parcour-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: $spacing-lg;
+  }
+
+  .parcour-column {
+    flex: 0 0 calc(50% - #{math.div($spacing-lg, 2)});
+    max-width: calc(50% - #{math.div($spacing-lg, 2)});
+    min-width: 0;
+  }
+
+  .parcour-section-title {
+    font-size: $font-lg;
+    height: auto;
+    min-height: 48px;
+  }
+
+  .parcour-item {
+    padding: $spacing-lg;
+    margin-bottom: $spacing-lg;
+  }
+
+  // --- FORMULAIRES TABLETTE (2 colonnes) ---
+  
+  // Container principal - 2 colonnes
+  .formulaire-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: $spacing-lg;
+    gap: $spacing-xl;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  // Chaque bloc prend ~50% (avec gap), min 400px
+  .form-block {
+    flex: 0 0 calc(50% - #{$spacing-xl});
+    max-width: calc(50% - #{$spacing-xl});
+    min-width: 400px; // Largeur minimale confortable
+    box-sizing: border-box;
+  }
+
+  .form-block-title {
+    font-size: $font-xl-tablet;
+    margin-bottom: $spacing-lg;
+  }
+
+  // Container de formulaire
+  .form-container {
+    width: 100%;
+    max-width: 600px; // Largeur max pour lisibilité
+    margin: 0 auto; // Centré dans son bloc
+    padding: $spacing-lg;
+    box-sizing: border-box;
+  }
+
+  .form-title {
+    font-size: $font-lg-tablet;
+    margin-bottom: $spacing-lg;
+  }
+
+  // Lignes de formulaire - garde flex-row avec wrap
+  .form-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+    margin-bottom: $spacing-md;
+  }
+
+  // Inputs adaptés
+  .form-input,
+  .form-textarea,
+  .form-select {
+    font-size: $font-md-tablet;
+    padding: $spacing-md;
+  }
+
+  // Flex proportions restaurées
+  .form-flex-1 {
+    flex: 1 1 45%;
+    min-width: 45%;
+  }
+
+  .form-flex-2 {
+    flex: 1 1 45%;
+    min-width: 45%;
+  }
+
+  // Section résumé professionnel - reste en row sur tablette
+  .professional-summary-row {
+    display: flex;
+    flex-direction: row;
+    gap: $spacing-md;
+  }
+
+  .professional-summary-col {
+    flex: 0 0 48%;
+    max-width: 48%;
+  }
+
+  // Containers
+  .form-certification-container,
+  .form-item-container {
+    width: 100%;
+    padding: $spacing-md;
+    margin-bottom: $spacing-md;
+  }
+
+  .form-certification-title {
+    font-size: $font-lg-tablet;
+  }
+
+  // Boutons
+  .form-btn,
+  .form-submit-btn {
+    font-size: $font-md-tablet;
+    padding: $spacing-md;
+  }
+
+  // Section admin - colonne sur tablette
+  .flex-center-start {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: $spacing-lg;
+  }
+
+  // Note container - static en tablette aussi
+  .note-container {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: $spacing-lg;
+    padding: $spacing-md;
+  }
+
+  .note-textarea {
+    min-height: 120px;
+    font-size: $font-md-tablet;
+  }
+
+  // Upload CV
+  .cv-upload-container {
+    width: 100%;
+    padding: $spacing-lg;
+    margin-top: 0;
+  }
+
+  .cv-upload-label {
+    font-size: $font-md-tablet;
+  }
+
+  .cv-pdf-actions {
+    flex-direction: row;
+    gap: $spacing-md;
+  }
+
+  // Upload certificats - row sur tablette
+  .cert-pdf-upload-row {
+    flex-direction: row;
+    gap: $spacing-md;
+  }
+
+  .cert-pdf-input {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .cert-pdf-link {
+    margin: 0 $spacing-md;
+  }
+
+  // --- NAVBAR ---
+  nav.navbar {
+    height: $navbar-height-tablet;
+    padding: 0 $spacing-md;
+    gap: $spacing-md;
+  }
+
+  .navbar .navbar-logo-section {
+    gap: $spacing-md;
+  }
+
+  .navbar .navbar-logo {
+    font-size: $font-lg;
+  }
+
+  .navbar .navbar-save-btn {
+    display: none; // Cache le bouton save en tablette (dispo dans burger)
+  }
+
+  // Cache les boutons desktop sur tablette
+  .navbar .navbar-desktop-btns {
+    display: none;
+  }
+
+  .navbar .navbar-nav-section {
+    display: none;
+  }
+
+  // Affiche le burger menu
+  .navbar .navbar-hamburger {
+    display: flex;
+  }
+
+  // Affiche l'overlay quand le menu est ouvert
+  .navbar .navbar-mobile-overlay {
+    display: block;
+  }
+
+  // Configure le menu mobile
+  .navbar .navbar-mobile-menu {
+    display: flex;
+    top: $navbar-height-tablet;
+    height: calc(100vh - #{$navbar-height-tablet});
+    max-width: 350px;
+  }
+
+  .navbar .navbar-mobile-menu-item {
+    padding: $spacing-lg $spacing-xl;
+    font-size: $font-md;
+  }
+}
+
+// ============================================
+// MOBILE (< 768px) - TOUT EN COLONNE
+// ============================================
+@media (max-width: $breakpoint-mobile-large) {
+  
+  // Reset global anti-débordement
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
+  }
+
+  body {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: calc($navbar-height-mobile + $spacing-lg);
+    margin: 0;
+  }
+
+  // --- LAYOUT PRINCIPAL ---
+  div.main-flex {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100vw;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  div.main-content {
+    width: 100%;
+    max-width: 100vw;
+    padding: $spacing-md;
+    margin-left: 0;
+    margin-right: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  // --- SIDEBAR EN COLONNE (au-dessus) ---
+  aside.profile-sidebar {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: $spacing-md;
+    padding: $spacing-md;
+    border-radius: $radius-md;
+  }
+
+  // --- SUMMARY (About + Objective + Photo) ---
+  section.summary-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    padding: $spacing-md 0;
+    gap: $spacing-md;
+    box-sizing: border-box;
+  }
+
+  section.summary-row .summary-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    gap: $spacing-md;
+    padding: $spacing-md;
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+  section.summary-row .summary-container section.summary-section {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  img.profile-img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  // --- CAROUSEL (3 projets empilés) ---
+  section.carousel-section {
+    width: 100%;
+    padding: $spacing-md 0;
+  }
+
+  figure.carousel-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: $spacing-md;
+  }
+
+  section.carousel-items {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: $spacing-md;
+  }
+
+  article.carousel-item {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    padding: $spacing-md;
+    box-sizing: border-box;
+  }
+
+  button.carousel-arrow {
+    width: 100%;
+    max-width: 150px;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-xl;
+    margin: 0 auto;
+  }
+
+  // --- PARCOURS (tout en colonne) ---
+  .parcour-container {
+    padding: $spacing-md;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+
+  .parcour-title {
+    font-size: $font-xl;
+    margin-bottom: $spacing-md;
+    text-align: center;
+  }
+
+  .parcour-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100vw;
+    gap: $spacing-lg;
+    box-sizing: border-box;
+  }
+
+  .parcour-column {
+    width: 100%;
+    max-width: 100vw;
+    min-width: 0;
+    flex: none;
+    box-sizing: border-box;
+  }
+
+  .parcour-section-title {
+    font-size: $font-lg;
+    height: auto;
+    min-height: auto;
+    margin-bottom: $spacing-md;
+    padding-bottom: $spacing-sm;
+  }
+
+  .parcour-item {
+    padding: $spacing-md;
+    margin-bottom: $spacing-md;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+
+  .parcour-item-title {
+    font-size: $font-md;
+    margin-bottom: $spacing-sm;
+  }
+
+  .parcour-item-company,
+  .parcour-item-meta,
+  .parcour-item-content {
+    font-size: $font-sm;
+  }
+
+  .parcour-pdf-link {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-sm;
+  }
+
+  // --- FORMULAIRES MOBILE (tout en colonne) ---
+  
+  // Container principal de la page formulaire
+  .formulaire-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: $spacing-md;
+    gap: $spacing-xl;
+    box-sizing: border-box;
+  }
+
+  // Chaque bloc de formulaire (Infos perso, Parcours, Admin)
+  .form-block {
+    width: 100%;
+    flex: none;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .form-block-title {
+    font-size: $font-xl-mobile;
+    margin-bottom: $spacing-lg;
+    text-align: center;
+  }
+
+  // Container de formulaire individuel
+  .form-container {
+    width: 100%;
+    max-width: 600px; // Largeur max pour lisibilité
+    margin: 0 auto; // Centré
+    padding: $spacing-lg;
+    box-sizing: border-box;
+  }
+
+  .form-title {
+    font-size: $font-lg-mobile;
+    margin-bottom: $spacing-lg;
+    text-align: center;
+  }
+
+  // Lignes de formulaire (flex-row en desktop → colonne en mobile)
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    width: 100%;
+    margin-bottom: $spacing-md;
+  }
+
+  // Tous les inputs, textarea, select en pleine largeur
+  .form-input,
+  .form-textarea,
+  .form-select,
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="url"],
+  input:not([type]),
+  select,
+  textarea {
+    width: 100%;
+    min-width: 0;
+    font-size: $font-md-mobile;
+    padding: $spacing-md;
+    box-sizing: border-box;
+  }
+
+  // Supprime les flex proportions en mobile
+  .form-flex-1,
+  .form-flex-2 {
+    width: 100%;
+    flex: none;
+    min-width: 0;
+  }
+
+  // Section résumé professionnel (About + Objective)
+  .professional-summary-row {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  .professional-summary-col {
+    width: 100%;
+    max-width: 100%;
+    flex: none;
+  }
+
+  // Containers de certifications et items répétables
+  .form-certification-container,
+  .form-item-container {
+    width: 100%;
+    padding: $spacing-md;
+    margin-bottom: $spacing-md;
+    box-sizing: border-box;
+  }
+
+  .form-certification-title {
+    font-size: $font-lg-mobile;
+    margin-bottom: $spacing-md;
+  }
+
+  // Boutons de formulaire
+  .form-btn,
+  .form-submit-btn,
+  .form-add-btn {
+    width: 100%;
+    font-size: $font-md-mobile;
+    padding: $spacing-md;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .form-remove-btn {
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-sm-mobile;
+  }
+
+  // Section admin (note + upload CV + password + delete)
+  .flex-center-start {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: $spacing-lg;
+  }
+
+  // Conteneur de notes (position absolute en desktop → static en mobile)
+  .note-container {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: $spacing-lg;
+    padding: $spacing-md;
+    box-sizing: border-box;
+  }
+
+  .note-textarea {
+    width: 100%;
+    min-height: 100px;
+    font-size: $font-sm-mobile;
+    box-sizing: border-box;
+  }
+
+  // Upload de CV
+  .cv-upload-container {
+    width: 100%;
+    padding: $spacing-lg;
+    margin-top: 0;
+    box-sizing: border-box;
+  }
+
+  .cv-upload-label {
+    font-size: $font-md-mobile;
+
+    &::after {
+      font-size: $font-sm-mobile;
+    }
+  }
+
+  .cv-pdf-actions {
+    flex-direction: column;
+    gap: $spacing-sm;
+
+    a, button {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+
+  // Upload de certificats PDF
+  .cert-pdf-upload-row {
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  .cert-pdf-input {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .cert-pdf-link {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: $spacing-sm $spacing-md;
+    box-sizing: border-box;
+  }
+
+  .btn-remove-pdf {
+    width: 100%;
+    text-align: center;
+    font-size: $font-sm-mobile;
+    padding: $spacing-sm $spacing-md;
+  }
+
+  // --- NAVBAR ---
+  nav.navbar {
+    height: $navbar-height-mobile;
+    padding: 0 $spacing-xs;
+    gap: $spacing-xs;
+    overflow: hidden;
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+
+  .navbar .navbar-left-section {
+    flex: 0 0 auto;
+    margin-right: 0;
+    gap: $spacing-xs;
+    min-width: 0;
+  }
+
+  .navbar .navbar-logo-section {
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: center;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .navbar .navbar-logo {
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 120px;
+    flex-shrink: 1;
+    padding: 0;
+    margin: 0;
+  }
+
+  .navbar .navbar-save-btn {
+    display: none; // Cache le bouton save en mobile (dispo dans burger)
+  }
+
+  .navbar .navbar-lang-btn {
+    padding: 2px;
+    min-width: auto;
+    flex-shrink: 0;
+  }
+
+  .navbar .navbar-lang-icon {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+
+  // Cache les boutons desktop sur mobile
+  .navbar .navbar-desktop-btns {
+    display: none;
+  }
+
+  .navbar .navbar-nav-section {
+    display: none;
+  }
+
+  // Affiche le burger menu
+  .navbar .navbar-hamburger {
+    display: flex;
+    width: 22px;
+    height: 18px;
+    flex-shrink: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .navbar .navbar-hamburger-line {
+    height: 2px;
+  }
+
+  // Affiche l'overlay quand le menu est ouvert
+  .navbar .navbar-mobile-overlay {
+    display: block;
+  }
+
+  // Configure le menu mobile
+  .navbar .navbar-mobile-menu {
+    display: flex;
+    top: $navbar-height-mobile;
+    height: calc(100vh - #{$navbar-height-mobile});
+    max-width: 280px;
+    width: 75%;
+  }
+
+  .navbar .navbar-mobile-menu-item {
+    padding: $spacing-md $spacing-lg;
+    font-size: $font-sm;
+  }
+}

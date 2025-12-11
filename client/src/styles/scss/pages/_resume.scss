@@ -1,0 +1,66 @@
+// PAGE CV EN LIGNE - Styles d'affichage du CV (DESKTOP ONLY)
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.summary {
+  &-row {
+    @include flex-row;
+    height: 55%;
+    padding: $spacing-huge;
+    gap: $spacing-giant;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  &-container {
+    @include flex-row;
+    gap: 70px;
+    padding: $spacing-huge $font-xxl;
+    min-width: 600px;
+    max-width: 900px;
+    background: $primary-bg;
+    border-radius: $spacing-xxl;
+    @include shadow-md;
+    align-items: flex-start;
+    
+    @media (max-width: 1600px) {
+      gap: $spacing-xxxl;
+      padding: $spacing-xxl $spacing-xl;
+      min-width: 450px;
+      max-width: 700px;
+    }
+  }
+
+  &-section {
+    flex: 1;
+    min-width: 0;
+    width: auto;
+  }
+
+  &-title {
+    margin-bottom: $spacing-lg;
+    font-size: $font-lg;
+    color: $text-color;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  &-text {
+    font-size: $font-sm;
+    line-height: 1.5;
+    color: $text-color;
+  }
+}
+
+.section-title {
+  font-size: $font-lg;
+  margin-bottom: $spacing-lg;
+  padding-bottom: $spacing-md;
+  color: $text-color;
+  font-weight: 700;
+  text-align: center;
+  border-bottom: 2px solid $primary-border;
+}

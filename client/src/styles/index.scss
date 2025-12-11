@@ -1,0 +1,33 @@
+// FICHIER SCSS PRINCIPAL - Importe tous les partiels DANS l'ordre
+
+
+// ABSTRACTS (Variables & Mixins)
+@use 'scss/abstracts/variables' as *;
+@use 'scss/abstracts/mixins' as *;
+
+// BASE (Reset & Typographie)
+@use 'scss/base/reset';
+@use 'scss/base/accessibility';
+
+// LAYOUT (Structure de page)
+@use 'scss/layout/main';
+
+// COMPONENTS 
+@use 'scss/components/buttons';
+@use 'scss/components/navbar';
+@use 'scss/components/sidebar';
+@use 'scss/components/carousel';
+@use 'scss/components/error-boundary';
+@use 'scss/components/password-change';
+@use 'scss/components/delete-account';
+@use 'scss/components/loading';
+
+// PAGES (Styles spécifiques aux pages)
+@use 'scss/pages/login';
+@use 'scss/pages/resume';
+@use 'scss/pages/parcour';
+@use 'scss/pages/forms';
+
+// RESPONSIVE (EN DERNIER pour override les styles desktop)
+@use 'scss/layout/responsive';
+

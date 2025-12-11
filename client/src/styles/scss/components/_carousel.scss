@@ -1,0 +1,144 @@
+// CARROUSEL - Composant carrousel
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.carousel {
+  &-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $spacing-xl $spacing-huge;
+    margin-top: -$spacing-xxxl;
+    width: 100%;
+    
+    @media (max-width: 1600px) {
+      padding: $spacing-xl 0;
+    }
+  }
+
+  &-container {
+    width: 100%;
+
+    @include flex-column;
+    align-items: center;
+  }
+
+  &-title {
+    font-size: $font-xxl;
+    color: $text-color;
+    font-weight: 700;
+    margin-bottom: $spacing-huge;
+    text-align: center;
+  }
+
+  &-wrapper {
+    @include flex-row;
+    align-items: stretch; // Change de center à stretch
+    width: 100%;
+    justify-content: center;
+    gap: $spacing-lg;
+    
+    @media (max-width: 1600px) {
+      gap: $spacing-md;
+    }
+  }
+
+  &-arrow {
+    background: $primary-bg;
+    border: 2px solid $primary-border;
+    border-radius: $radius-xl;
+    padding: 0 $spacing-lg; // Retire le padding vertical
+    cursor: pointer;
+    font-weight: 700;
+    font-size: $font-xxxl;
+    color: $text-color;
+    @include shadow-sm;
+    transition: background $transition-fast, color $transition-fast, transform $transition-fast;
+    min-width: 60px;
+    display: flex; // Ajout flex pour centrer le texte
+    align-items: center; // Centre verticalement le texte
+    justify-content: center; // Centre horizontalement le texte
+    align-self: stretch; // Prend toute la hauteur disponible
+
+    &:hover {
+      background: $hover-bg-primary;
+      transform: scale(1.05); // Réduit le scale pour éviter de casser le layout
+    }
+
+    &-left {
+      margin-right: 0;
+    }
+
+    &-right {
+      margin-left: 0;
+    }
+  }
+
+  &-items {
+    @include flex-row;
+    gap: $spacing-huge;
+    justify-content: center;
+    
+    @media (max-width: 1600px) {
+      gap: $spacing-md;
+    }
+  }
+
+  &-item {
+    background: $section-bg;
+    border-radius: $radius-xxl;
+    @include shadow-md;
+    padding: $font-xxl;
+    min-width: 385px;
+    max-width: 440px;
+    flex: 1;
+    @include flex-column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid $primary-border;
+    transition: all $transition-fast;
+    cursor: pointer;
+    
+    @media (max-width: 1600px) {
+      min-width: 220px;
+      max-width: 260px;
+      padding: $spacing-lg;
+    }
+
+    &:hover {
+      transform: translateY($hover-transform-translate);
+      @include shadow-xl;
+    }
+
+    &-title {
+      font-weight: 700;
+      font-size: $font-xl;
+      margin-bottom: $spacing-lg;
+      color: $text-color;
+      text-align: center;
+      
+      @media (max-width: 1600px) {
+        font-size: $font-lg;
+        margin-bottom: $spacing-md;
+      }
+    }
+
+    &-content {
+      font-size: $font-md;
+      color: $text-color;
+      text-align: center;
+      min-height: 48px;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      white-space: normal;
+      
+      @media (max-width: 1600px) {
+        font-size: $font-sm;
+        min-height: 36px;
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+
+  "navbar": {
+    "title": "Online Resume",
+    "form": "Form",
+    "projects": "My Projects",
+    "monParcour": "My background",
+    "save": "Save",
+    "logout": "Logout",
+    "login": "Login"
+  },
+  "resume": {
+    "city": "City",
+    "age": "Age",
+    "languages": "Languages",
+    "skills": "Skills",
+    "softSkills": "Soft Skills",
+    "hobbies": "Hobbies",
+    "contact": "Contact",
+    "about": "About me",
+    "objective": "My objective",
+    "projects": "My projects",
+    "monParcour": "My background"
+  }
+}

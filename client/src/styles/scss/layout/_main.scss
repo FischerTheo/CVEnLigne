@@ -1,0 +1,56 @@
+// LAYOUT - Structures de mise en page principales (DESKTOP ONLY)
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+body {
+  padding-top: calc($navbar-height + $spacing-xl);
+}
+
+.main-flex {
+  min-height: 90vh;
+  background: $primary-bg;
+  padding-top: 0;
+  padding-left: 0;
+  position: relative;
+}
+
+.main-content {
+  flex: 1;
+  @include flex-column;
+  align-items: center;
+  height: 100%;
+  padding: $spacing-xl;
+  width: 100%;
+  min-height: 90vh;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.flex-center-start {
+  @include flex-row;
+  padding: 0;
+}
+
+.summary-row {
+  @include flex-row;
+  height: auto;
+}
+
+.summary-container {
+  @include flex-row;
+  gap: $spacing-lg;
+}
+
+.parcour-content {
+  @include flex-row;
+  gap: $spacing-xl;
+}
+
+.profile-sidebar {
+  width: var(--sidebar-width, 425px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+}

@@ -1,0 +1,374 @@
+// FORMULAIRES - Composants et styles de formulaires (DESKTOP ONLY)
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.form {
+  &-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: $spacing-xl;
+    background: $primary-bg;
+    border-radius: $radius-xl;
+    @include shadow-lg;
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="url"],
+    input:not([type]),
+    select,
+    textarea {
+      @include form-input-styles;
+    }
+
+    h3 {
+      font-size: $font-md;
+      margin: $spacing-md 0;
+    }
+
+    .note-container .note-textarea {
+      max-height: none;
+    }
+
+    &-wrapper {
+      align-items: flex-start;
+    }
+  }
+
+  &-title {
+    color: $text-color;
+    font-size: $font-lg;
+    font-weight: 700;
+    margin-bottom: $spacing-lg;
+    text-align: center;
+  }
+
+  &-section {
+    &-title {
+      color: $text-color;
+      font-size: $font-md;
+      font-weight: 600;
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  &-row {
+    @include flex-row;
+    gap: $spacing-md;
+    margin-bottom: $spacing-md;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  &-input {
+    flex: 1;
+    min-width: 200px;
+    font-size: $font-md;
+    padding: $spacing-md;
+    @include input-base;
+  }
+
+  &-textarea {
+    width: 100%;
+    min-height: 30px;
+    font-size: $font-md;
+    padding: $spacing-md;
+    @include input-base;
+    resize: none;
+    overflow: hidden;
+  }
+
+  &-item-container {
+    @include flex-column;
+    border: 1px solid #eee;
+    padding: $spacing-md;
+    margin-bottom: $spacing-md;
+    border-radius: $radius-sm;
+  }
+
+  &-message {
+    margin-top: 60px;
+    font-size: $font-md;
+
+    &-success {
+      color: green;
+    }
+
+    &-error {
+      color: red;
+    }
+  }
+
+  &-service {
+    &-item {
+      margin-bottom: $spacing-md;
+    }
+
+    &-input {
+      width: 100%;
+      margin-bottom: $spacing-sm;
+      padding: $spacing-sm;
+      font-size: $font-sm;
+    }
+
+    &-textarea {
+      width: 100%;
+      min-height: 30px;
+      padding: $spacing-sm;
+      font-size: $font-sm;
+    }
+  }
+}
+
+.form-certification-container {
+  margin-bottom: $spacing-lg;
+  padding: $spacing-md;
+  border: 1px solid #ccc;
+  border-radius: $radius-md;
+}
+
+.form-flex {
+  &-1 {
+    flex: 1;
+    min-width: 150px;
+  }
+
+  &-2 {
+    flex: 2;
+    min-width: 200px;
+  }
+}
+
+.formulaire-container {
+  @include flex-row;
+  padding-top: 0;
+  gap: $spacing-xxxl;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.form-block {
+  @include flex-column;
+  align-items: stretch;
+  flex: 0 0 36%;
+  max-width: 36%;
+  min-width: 0;
+  padding: 0;
+
+  &-title {
+    max-width: 600px;
+    margin: 0 auto $spacing-md auto;
+    padding: 0;
+    color: $text-color;
+    font-size: $font-xl;
+    font-weight: 700;
+    text-align: center;
+  }
+}
+
+.professional-summary {
+  &-row {
+    @include flex-row;
+    gap: $spacing-md;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+  }
+
+  &-col {
+    flex: 0 0 48%;
+    max-width: 48%;
+  }
+
+  &-textarea {
+    width: 100%;
+    max-height: none;
+  }
+}
+
+.cert-pdf {
+  &-label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: $spacing-md;
+  }
+
+  &-upload-row {
+    @include flex-row;
+    gap: $spacing-md;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &-input {
+    display: block;
+    flex: 1;
+    min-width: 200px;
+  }
+
+  &-link {
+    margin-left: $spacing-md;
+    margin-right: $spacing-md;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.form-cert-desc {
+  min-height: 60px;
+  margin-bottom: $spacing-md;
+}
+
+.flex-center-start {
+  @include flex-row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.cv-upload {
+  &-container {
+    margin-top: $spacing-xl;
+    padding: $spacing-xl;
+    background: rgba($button-bg, 0.05);
+    border: 2px dashed rgba($button-bg, 0.3);
+    border-radius: $radius-lg;
+    transition: all 0.3s ease;
+    text-align: center;
+
+    &:hover {
+      background: rgba($button-bg, 0.08);
+      border-color: rgba($button-bg, 0.5);
+    }
+  }
+
+  &-label {
+    font-weight: 600;
+    display: block;
+    font-size: $font-lg;
+    margin-bottom: $spacing-md;
+    color: $text-color;
+    cursor: pointer;
+    position: relative;
+
+    &::after {
+      content: "Cliquez ou glissez-déposez votre CV (PDF)";
+      display: block;
+      font-size: $font-sm;
+      color: $secondary-accent;
+      font-weight: 400;
+      margin-top: $spacing-sm;
+    }
+  }
+}
+
+.cv-pdf {
+  &-file-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  &-actions {
+    margin-top: $spacing-lg;
+    padding-top: $spacing-lg;
+    border-top: 1px solid rgba($button-bg, 0.2);
+    display: flex;
+    gap: $spacing-md;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &-link {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-size: $font-md;
+    padding: $spacing-md $spacing-lg;
+    background: $button-bg;
+    color: white;
+    border-radius: $radius-md;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    @include shadow-md;
+
+    &:hover {
+      background: $hover-bg-button;
+      transform: translateY(-2px);
+      @include shadow-lg;
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+.note {
+  &-container {
+    position: absolute;
+    width: $note-container-width;
+    top: 90px;
+    left: 10px;
+  }
+
+  &-textarea {
+    font-size: $font-md;
+    padding: $spacing-md;
+  }
+}
+
+.table-transparent {
+  th, td {
+    padding: $spacing-md;
+    font-size: $font-md;
+  }
+}
+
+.cert {
+  &-item {
+    padding: $spacing-md;
+    margin-bottom: $spacing-md;
+  }
+
+  &-title {
+    font-size: $font-md;
+    margin-bottom: $spacing-sm;
+  }
+
+  &-meta {
+    font-size: $font-sm;
+    margin-bottom: $spacing-sm;
+  }
+
+  &-desc {
+    font-size: $font-md;
+    margin-top: $spacing-sm;
+  }
+
+  &-pdf-link {
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-sm;
+    margin-top: $spacing-sm;
+  }
+
+  &-upload-section {
+    margin-top: $spacing-md;
+  }
+
+  &-upload-label {
+    font-size: $font-sm;
+  }
+}
